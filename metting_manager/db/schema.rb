@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20150707071348) do
 
+  create_table "groups", force: :cascade do |t|
+    t.string  "name",    limit: 255,   default: "0", null: false
+    t.integer "user_id", limit: 4,     default: 0,   null: false
+    t.text    "desc",    limit: 65535
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string  "name",     limit: 255
     t.integer "quantity", limit: 4
