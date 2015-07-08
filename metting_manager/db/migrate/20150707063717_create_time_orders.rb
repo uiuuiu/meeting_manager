@@ -1,4 +1,4 @@
-class CreateTime_orders < ActiveRecord::Migration
+class CreateTimeOrders < ActiveRecord::Migration
   def change
     create_table :time_orders do |t|
       t.datetime :time_signed
