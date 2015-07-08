@@ -1,0 +1,22 @@
+<div>
+	thong tin group
+	<br>
+	name: 
+	<%= @group[0].name %>
+	<br>
+	desc: 
+	<%=@group[0].desc %>
+	<br>
+	<% @memlist = Memberlist.where(group_id: @group[0].id)%>
+		<% if @memlist.size >0 %>
+		<%= @memlist.size%> thanh vien
+		<br>
+		<% @memlist.each do |f| %>
+		<% @user=User.find_by_id(f.user_id)%>
+		<br>
+		<%= @user.email%>
+		<%end%>
+		<%else%>
+		group chua co thanh vien nao
+		<%end%>
+</div>
