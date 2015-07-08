@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     get 'profile'
   end
 
+  resources :profiles do
+    get 'show'
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
