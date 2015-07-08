@@ -14,7 +14,7 @@
 		<% @memlist.each do |f| %>
 		<% @user=User.find_by_id(f.user_id)%>
 		<br>
-		<%= link_to "#{@user.name}",profiles_path%>
+		<%= link_to "#{@user.email}",profiles_path%>
 		<%end%>
 		<%else%>
 		group chua co thanh vien nao
