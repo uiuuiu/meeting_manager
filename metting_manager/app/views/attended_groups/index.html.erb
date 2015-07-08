@@ -1,0 +1,10 @@
+<div>
+<% if @at_group.size>0 %>
+  <% @at_group.each do |f| %>
+  	<br>
+ 	<%=link_to "#{f.name}",group_profile_path(f.id) %>
+  <%end%>
+<%else%>
+ban chua tham gia group nao
+<%end%>
+</div>

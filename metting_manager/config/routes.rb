@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'groups/index'
+
   get 'users/index'
 
   devise_for :users
@@ -8,6 +10,16 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'users#index'
 
+  resources :attended_groups do
+  end
+
+  resources :groups do
+    get 'profile'
+  end
+
+  resources :profiles do
+    get 'show'
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
