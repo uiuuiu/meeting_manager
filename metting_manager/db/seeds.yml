@@ -1,0 +1,231 @@
+roles_list:
+- 
+  name: admin
+- 
+  name: employer
+-
+  name: teamleader
+
+group_list:
+- 
+  name: Team Ruby
+  user_id: 3
+  desc: group team ruby
+
+- 
+  name: Team Android
+  user_id: 5
+  desc: group team android
+
+-
+  name: Team IOS
+  user_id: 7
+  desc: group team IOS
+
+-
+  name: Team Game
+  user_id: 3
+  desc: group team game
+
+-
+  name: Team JAV
+  user_id: 6
+  desc: group team JAV
+
+memberlist_list:
+- 
+  user_id: 4
+  group_id: 3
+
+- 
+  user_id: 5
+  group_id: 3
+
+-
+  user_id: 6
+  group_id: 3
+
+-
+  user_id: 7
+  group_id: 3
+
+- 
+  user_id: 8
+  group_id: 3
+
+- 
+  user_id: 1
+  group_id: 2
+
+-
+  user_id: 2
+  group_id: 2
+
+-
+  user_id: 3
+  group_id: 2
+- 
+  user_id: 4
+  group_id: 2
+
+- 
+  user_id: 7
+  group_id: 1
+
+-
+  user_id: 8
+  group_id: 1
+
+-
+  user_id: 1
+  group_id: 1
+- 
+  user_id: 2
+  group_id: 1
+
+- 
+  user_id: 3
+  group_id: 1
+
+-
+  user_id: 4
+  group_id: 1
+
+-
+  user_id: 5
+  group_id: 1
+-
+  user_id: 6
+  group_id: 1
+
+room_list:
+-
+  name: 401
+  quantity: 50
+-
+  name: 402
+  quantity: 30
+
+user_list:
+- 
+  email: chuong@gmail.com
+  password: 12345678
+
+- 
+  email: phuc@gmail.com
+  password: 12345678
+
+- 
+  email: luong@gmail.com
+  password: 12345678
+
+- 
+  email: tien@gmail.com
+  password: 12345678
+
+- 
+  email: son@gmail.com
+  password: 12345678
+
+- 
+  email: chien@gmail.com
+  password: 12345678
+
+- 
+  email: duydy@gmail.com
+  password: 12345678
+
+- 
+  email: messi@gmail.com
+  password: 12345678
+
+- 
+  email: ronaldo@gmail.com
+  password: 12345678
+
+- 
+  email: congphuong@gmail.com
+  password: 12345678
+
+order_list:
+- 
+  group_id: 3
+  time_id: 1
+  content: |-
+              HOp dau tuan 
+  room_id: 1
+
+- 
+  group_id: 2
+  time_id: 2
+  content: |-
+              HOp dau cuoi tuan 
+  room_id: 1
+
+- 
+  group_id: 4
+  time_id: 3
+  content: |-
+              Projact meeting_manager 
+  room_id: 2
+
+- 
+  group_id: 1
+  time_id: 4
+  content: |-
+              HOp danh gia nhan su
+  room_id: 1
+
+- 
+  group_id: 1
+  time_id: 5
+  content: |-
+              HOp trong tuan 
+  room_id: 1
+
+- 
+  group_id: 3
+  time_id: 6
+  content: |-
+              HOp hanh 
+  room_id: 2
+
+- 
+  group_id: 4
+  time_id: 7
+  content: |-
+              Hop to chuc su kien 
+  room_id: 2
+
+- 
+  group_id: 2
+  time_id: 8
+  content: |-
+              abc
+  room_id: 1
+
+assigment_list:
+-
+  user_id: 1
+  role_id: 3
+-
+  user_id: 1
+  role_id: 3
+-
+  user_id: 1
+  role_id: 3
+-
+  user_id: 1
+  role_id: 2
+-
+  user_id: 1
+  role_id: 2
+-
+  user_id: 1
+  role_id: 1
+-
+  user_id: 1
+  role_id: 2
+-
+  user_id: 1
+  role_id: 3
