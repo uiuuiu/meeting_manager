@@ -1,2 +1,26 @@
-<h1>Groups#index</h1>
-<p>Find me in app/views/groups/index.html.erb</p>
+<br>
+<div>
+<%= form_tag "/add" do %>
+  <li class="mnav-ul-li">
+        <% if @group!=nil&&@group.size>0 %>
+          <% @group.each do |f| %>
+            <li>
+            <%=link_to "#{f.name}",group_path(f.id)%>
+            </li>
+            <br>
+          <%end%>
+
+        <%end%>
+      <%= button_tag "add",:class => "btn btn-info btn-md"%>
+  </li>
+  <% end %>
+<script>
+$(document).on('click', '.mnav-ul-li', function(){
+$(this).parent().find('ul:first > li').slideToggle();
+$(this).parent().find('ul:first > li').css({ 
+"display": "block",
+"width": "200px", 
+});
+});    
+</script>
+</div>
