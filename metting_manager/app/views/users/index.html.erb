@@ -1,4 +1,25 @@
+<br>
 <div>
-  <br>
-  <%=link_to 'attended_group',attended_groups_path,:class => "btn btn-info btn-md" if current_user !=nil%>
+  <li class="mnav-ul-li">
+    <%= button_tag "attended_group",:class => "btn btn-info btn-md"%>
+      <ul class='mnav-ul-ul'>
+        <% if @at_group!=nil&&@at_group.size>0 %>
+          <% @at_group.each do |f| %>
+            <li>
+            <%=link_to "#{f.name}",group_profile_path(f.id)%>
+            </li>
+            <br>
+          <%end%>
+        <%end%>
+      </ul>
+  </li>
+<script>
+$(document).on('click', '.mnav-ul-li', function(){
+$(this).parent().find('ul:first > li').slideToggle();
+$(this).parent().find('ul:first > li').css({ 
+"display": "block",
+"width": "200px", 
+});
+});    
+</script>
 </div>
