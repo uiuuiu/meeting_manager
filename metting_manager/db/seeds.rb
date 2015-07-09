@@ -1,6 +1,5 @@
 seed_file = File.join(Rails.root, 'db', 'seeds.yml')
 config = YAML::load_file(seed_file)
-# binding.pry
 Role.create(config["roles_list"])
 User.create(config["user_list"])
 Room.create!(config["room_list"])

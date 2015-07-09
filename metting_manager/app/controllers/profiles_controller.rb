@@ -19,13 +19,17 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+
   end
 
   # POST /profiles
   # POST /profiles.json
   def create
-    @profile = Profile.new(profile_params)
-    #binding.pry
+    tam= profile_params
+    tam["user_id"] = current_user.id
+    @profile = Profile.new
+    @profile = Profile.create(tam)
+  
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
@@ -40,6 +44,7 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }

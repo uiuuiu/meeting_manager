@@ -45,6 +45,8 @@ group :development do
   gem 'faker'
    # gem to debug
   gem 'pry-rails', :require => 'pry-rails'
+  gem 'twitter-bootstrap-rails'
+  gem 'bootstrap_form'
 end
 group :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

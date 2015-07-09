@@ -5,4 +5,5 @@ class Profile < ActiveRecord::Base
   validates :level, presence: true, length: { maximum: 540 }
   validates :picture, presence: true
   attr_accessor :is_thumbnable
+  belongs_to :user
 end

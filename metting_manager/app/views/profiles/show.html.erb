@@ -21,6 +21,5 @@
 <div class="picture">
 	<%= image_tag @profile.picture_url(:thumb) if @profile.picture? %>
 </div>
-
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>
