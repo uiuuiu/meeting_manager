@@ -8,7 +8,6 @@ class GroupsController < ApplicationController
 	  		@groups = current_user.groups
 	  	end
   end
-
   # GET /groups/1
   # GET /groups/1.json
   def show

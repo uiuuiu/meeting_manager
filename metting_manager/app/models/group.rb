@@ -1,4 +1,3 @@
 class Group < ActiveRecord::Base
-	belongs_to :user
-	has_many   :memberlists
+	has_many :memberlists
 end

@@ -1,14 +1,6 @@
-id = <%=@id1= @group.id %>
-<%= form_tag "/update?id1=#{@id1}"%>
-<%= label_tag "id"%><td><br>
-<%= text_field_tag :id , params[:id]="#{@group.id}"%><br>
-<%= label_tag "name"%><td><br>
-<%= text_field_tag :name , params[:name]="#{@group.name}"%><br>
-<%= label_tag "user_id"%><td><br>
-<%= text_field_tag :user_id, params[:user_id]="#{@group.user_id}"%><br>
-<%= label_tag "desc"%><td><br>
-<%= text_field_tag :desc, params[:desc]="#{@group.desc}"%><br>
+<h1>Editing Group</h1>
 
+<%= render 'form' %>
 
-<br>
-<%= submit_tag "ok"%>
+<%= link_to 'Show', @group %> |
+<%= link_to 'Back', groups_path %>
