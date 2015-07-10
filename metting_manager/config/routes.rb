@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-
+  resources :time_orders do
+  end
+  resources :welcome do
+  end
   resources :attended_groups do
   end
 

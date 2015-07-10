@@ -22,7 +22,7 @@ table td.highlighted {
 </head>
 <body>
   <% @daytime = Array.new %>
-  <% @daytime.push(5) %>
+  <% @tam = "" %>
   <table cellpadding="0" cellspacing="0" id="our_table">
   <tr>
     <td>a</td>
@@ -40,48 +40,61 @@ table td.highlighted {
     <td>i</td>
   </tr>
 </table>
-<% @list = Array.new %>
 <table id='our_table'>
- <tr>
-   <th></th>
-  <% @beginning_of_month = Date.civil(2009, 12, 1) %>
-  <% @end_of_month = Date.civil(2009, 12, -1) %>
+  <thead>
+       <tr>
+           <th></th>
+          <% @beginning_of_month = Date.civil(2009, 12, 1) %>
+          <% @end_of_month = Date.civil(2009, 12, -1) %>
 
-  <% (@beginning_of_month..@end_of_month).each do |d| %>
-  <th><%= d.day %></th>
-   <% end %>
-  </tr>
-  <% time = 8 %>
-  <% tableid = 1 %>
-  <% tam = 0 %>
-  <% 11.times do %>
-  <tr>
-  <td><%= "#{time}:00" %></td>
-  <% time = time +1 %>
-  	<% (@beginning_of_month..@end_of_month).each do |d| %>
-  	<td id="<%= tam*100+ d.day %>"></td>
-    <% tableid = tableid +1 %>    
-  	<% end %>
-  </tr>
-  <% tam = tam +1 %>
-  <% end %>
+          <% (@beginning_of_month..@end_of_month).each do |d| %>
+          <th><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
+           <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% time = 8 %>
+        <% tableid = 1 %>
+        <% tam = 0 %>
+        <% 11.times do %>
+        <tr>
+            <th><%= "#{time}:00" %></th>
+            <% time = time +1 %>
+          	<% (@beginning_of_month..@end_of_month).each do |d| %>
+          	<td id="<%= tam*100+ d.day %>"></td>
+            <% tableid = tableid +1 %>    
+          	<% end %>
+        </tr>
+        <% tam = tam +1 %>
+        <% end %>
+    </tbody>
 </table>
   <script type="text/javascript" charset="utf-8">
     $(function () {
   var isMouseDown = false,
     isHighlighted;
-    list = new Array();
-    
+    list = new Array();   
   $("#our_table td")
-    .mousedown(function () {
+    .mousedown(function (e) {
       isMouseDown = true;
       $(this).toggleClass("highlighted");
+      columnNumber = $(e.target).index() + 1;
+      headerText = $('th:nth-child(' + columnNumber + ')').text();
+      dayytime = $(this).siblings(":first").text()+" "+headerText;
       if($(this).is(".highlighted")) 
       {
-        list.push("" + $(this).find("td:first-child").text() + $(this).find("th:first-child").text());
-        <%= @daytime %> = list;
+        list.push(dayytime);
+        $('#daytime').val(list);
       }
-      $(this).text($(this).text() == "DON'T PUSH ME" ? "PUSH ME": "DON'T PUSH ME");
+      else
+      {
+        for (var i=list.length-1; i>=0; i--) {
+        if (list[i] === dayytime) {
+            list.splice(i, 1);
+            $('#daytime').val(list);
+          }
+        }
+      }
       isHighlighted = $(this).hasClass("highlighted");
       return false; // prevent text selection
     })
@@ -96,8 +109,21 @@ table td.highlighted {
     .mouseup(function () {
       isMouseDown = false;
     });
+    $("#send_list").click(function(){
+      $.ajax({
+          type: 'GET',
+          url: 'welcome/new',
+          dataType: 'script',
+          data: {order: list}
+
+        });
+    });
 });
   </script>
-  <%=  link_to "send daytime", new_welcome_path(:type => "#{@daytime}") %>
+  <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true}, url: new_time_order_path, method: :get) do |f| %>
+    <%= f.hidden_field :time_signed, :id => "daytime" %>
+    <%= f.submit "Create", class: "btn btn-primary" %>  
+  <% end %>
+  <%=  link_to "send daytime", new_welcome_path(:type => @daytime) %>
 </body>
 </html>
