@@ -2,13 +2,10 @@
 <div>
 <%= form_tag "/add" do %>
   <li class="mnav-ul-li">
-<<<<<<< HEAD
         <% if @groups!=nil&&@groups.size>0 %>
           <% @groups.each do |f| %>
-=======
         <% if @group!=nil&&@group.size>0 %>
           <% @group.each do |f| %>
->>>>>>> master
             <li>
             <%=link_to "#{f.name}",group_path(f.id)%>
             </li>

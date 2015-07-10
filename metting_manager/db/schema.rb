@@ -11,12 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150708035738) do
-=======
-ActiveRecord::Schema.define(version: 20150710030150) do
->>>>>>> c67865480f521f8f0d6c901c8fa447472669d2f9
-
   create_table "assigments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "role_id",    limit: 4
