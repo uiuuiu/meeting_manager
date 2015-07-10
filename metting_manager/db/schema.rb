@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707082813) do
+ActiveRecord::Schema.define(version: 20150708035738) do
+
+  create_table "assigments", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "role_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -37,20 +44,35 @@ ActiveRecord::Schema.define(version: 20150707082813) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "level",      limit: 255
+    t.string   "picture",    limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "roles", force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "desc", limit: 255
+    t.string   "name",       limit: 255
+    t.string   "desc",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string  "name",     limit: 255
-    t.integer "quantity", limit: 4
+    t.string   "name",       limit: 255
+    t.integer  "quantity",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "times", force: :cascade do |t|
+  create_table "time_orders", force: :cascade do |t|
     t.datetime "time_signed"
     t.datetime "time_start"
     t.datetime "time_end"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
