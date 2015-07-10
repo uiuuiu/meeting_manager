@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Name:</strong>
+  <%= @profile.name %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @profile.level %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @profile.picture %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @profile.user_id %>
+</p>
+<div class="picture">
+	<%= image_tag @profile.picture_url(:thumb) if @profile.picture? %>
+</div>
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>
