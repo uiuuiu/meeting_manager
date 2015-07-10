@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :profiles
   get 'home/index'
   devise_for :users
@@ -12,12 +13,25 @@ Rails.application.routes.draw do
     end
   end
   #devise_for :users
+  get 'groups/index'
+
+  get 'users/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
+  resources :attended_groups do
+  end
+
+  resources :groups do
+    get 'profile'
+  end
+
+  resources :profiles do
+    get 'show'
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
