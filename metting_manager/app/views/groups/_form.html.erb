@@ -1,8 +1,7 @@
-<div style="width:25%;">
-<%= form_for(@group, class: "form-signin") do |f| %>
+<%= form_for(@group) do |f| %>
   <% if @group.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
 
       <ul>
       <% @group.errors.full_messages.each do |message| %>
@@ -14,20 +13,17 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name %>
   </div>
-
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.text_field :user_id, class: "form-control" %>
+    <%= f.number_field :user_id %>
   </div>
-
   <div class="field">
     <%= f.label :desc %><br>
-    <%= f.text_field :desc, class: "form-control" %>
+    <%= f.text_area :desc %>
   </div>
   <div class="actions">
-    <%= f.submit class: "btn btn-success" %>
+    <%= f.submit %>
   </div>
 <% end %>
-</div>
