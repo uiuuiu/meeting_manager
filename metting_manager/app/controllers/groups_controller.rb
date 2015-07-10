@@ -4,19 +4,17 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    #groups = Group.all
-      if current_user
-        @groups = current_user.groups #
-      end
+	  	if current_user
+	  		@groups = current_user.groups
+	  	end
   end
-   def profile
-        @group = Group.where(id: params[:group_id].to_i)
-    end
+
   # GET /groups/1
   # GET /groups/1.json
   def show
-     @group = current_user.groups.find_by_id(params[:id])
-     @listmembers = @group.memberlists
+  	#binding.pry
+  	  @group = current_user.groups.find_by_id(params[:id])
+      @listmembers = @group.memberlists
   end
 
   # GET /groups/new
