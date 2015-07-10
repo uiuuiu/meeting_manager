@@ -40,7 +40,6 @@ class GroupsController < ApplicationController
       end
     end
   end
-
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update

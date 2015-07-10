@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groups
   get 'groups/index'
 
   get 'users/index'
