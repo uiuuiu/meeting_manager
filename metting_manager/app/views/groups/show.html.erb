@@ -1,19 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @group.user_id %>
-</p>
-
-<p>
-  <strong>Desc:</strong>
-  <%= @group.desc %>
-</p>
-
+<div>
+	thong tin group
+	<br>
+	name: 
+	<%= @group.name %>
+	<br>
+	desc: 
+	<%=@group.desc %>
+	<br>
+	<% @memlist = Memberlist.where(group_id: @group.id)%>
+		<% if @memlist.size >0 %>
+		<%= @memlist.size%> thanh vien
+		<br>
+		<% @memlist.each do |f| %>
+		<% @user=User.find_by_id(f.user_id)%>
+		<br>
+		<%= link_to "#{@user.email}",group_path%>
+		<%end%>
+		<%else%>
+		group chua co thanh vien nao
+		<%end%>
+        <br>
+		<br>
+</div>
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
