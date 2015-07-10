@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :groups do
     get 'profile'
+    post 'add'
   end
 
   resources :profiles do

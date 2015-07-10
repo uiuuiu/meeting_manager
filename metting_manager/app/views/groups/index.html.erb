@@ -2,8 +2,8 @@
 <div>
 <%= form_tag "/add" do %>
   <li class="mnav-ul-li">
-        <% if @group!=nil&&@group.size>0 %>
-          <% @group.each do |f| %>
+        <% if @groups!=nil&&@groups.size>0 %>
+          <% @groups.each do |f| %>
             <li>
             <%=link_to "#{f.name}",group_path(f.id)%>
             </li>

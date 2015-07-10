@@ -2,19 +2,17 @@
 	thong tin group
 	<br>
 	name: 
-	<%= @group[0].name %>
+	<%= @group.name %>
 	<br>
 	desc: 
-	<%=@group[0].desc %>
+	<%=@group.desc %>
 	<br>
-	<% @memlist = Memberlist.where(group_id: @group[0].id)%>
-		<% if @memlist.size >0 %>
-		<%= @memlist.size%> thanh vien
+		<% if @listmembers.size >0 %>
+		<%= @listmembers.size%> thanh vien
 		<br>
-		<% @memlist.each do |f| %>
-		<% @user=User.find_by_id(f.user_id)%>
+		<% @listmembers.each do |f| %>
+		<%= link_to "#{User.find_by_id(f.user_id).email}",group_path%>
 		<br>
-		<%= link_to "#{@user.email}",group_path%>
 		<%end%>
 		<%else%>
 		group chua co thanh vien nao
