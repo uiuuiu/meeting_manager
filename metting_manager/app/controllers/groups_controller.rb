@@ -4,15 +4,15 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-	  	if current_user
-	  		@groups = current_user.groups
-	  	end
+   if current_user
+        @groups = current_user.groups
+      end
   end
+
   # GET /groups/1
   # GET /groups/1.json
   def show
-  	#binding.pry
-  	  @group = current_user.groups.find_by_id(params[:id])
+      @group = current_user.groups.find_by_id(params[:id])
       @listmembers = @group.memberlists
   end
 
@@ -23,6 +23,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
+    @group = Group.find_by_id(params[:id])
   end
 
   # POST /groups
@@ -40,6 +41,7 @@ class GroupsController < ApplicationController
       end
     end
   end
+
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
