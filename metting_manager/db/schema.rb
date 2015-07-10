@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20150708042437) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "times", force: :cascade do |t|
+  create_table "time_orders", force: :cascade do |t|
     t.datetime "time_signed"
     t.datetime "time_start"
     t.datetime "time_end"

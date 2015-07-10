@@ -14,6 +14,11 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+<<<<<<< HEAD
 //= require bootstrap
 //= require_tree .
 //= require bootstrap
+=======
+//= require bootstrap.min
+//= require_tree .
+>>>>>>> master
