@@ -1,0 +1,24 @@
+<div>
+	thong tin group
+	<br>
+	name: 
+	<%= @group.name %>
+	<br>
+	desc: 
+	<%=@group.desc %>
+	<br>
+		<% if @listmembers.size >0 %>
+		<%= @listmembers.size%> thanh vien
+		<br>
+		<% @listmembers.each do |f| %>
+		<%= link_to "#{User.find_by_id(f.user_id).email}",group_path%>
+		<br>
+		<%end%>
+		<%else%>
+		group chua co thanh vien nao
+		<%end%>
+        <br>
+		<br>
+		<td><%= link_to 'edit', edit_group_path() if current_user!=nil %></td>
+		
+</div>

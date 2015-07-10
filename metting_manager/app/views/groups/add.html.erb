@@ -1,0 +1,17 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+<title>them</title>
+</head>
+<body>
+
+
+<%= form_tag "/add"%>
+<%= label_tag "name"%><td><br>
+<%= text_field_tag :name, params[:name]%><br>
+<%= label_tag "desc"%><td><br>
+<%= text_field_tag :desc, params[:desc]%><br>
+<br>
+<%= submit_tag "ok"%>
+</body>
+</html>
