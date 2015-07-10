@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groups
   get 'groups/index'
 
   get 'users/index'
@@ -8,13 +9,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'users#index'
 
   resources :attended_groups do
   end
 
   resources :groups do
     get 'profile'
+    post 'add'
   end
 
   resources :profiles do
