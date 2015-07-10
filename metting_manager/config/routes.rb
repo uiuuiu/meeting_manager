@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groups
   get 'groups/index'
 
   get 'users/index'
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :groups do
     get 'profile'
+    post 'add'
   end
 
   resources :profiles do
