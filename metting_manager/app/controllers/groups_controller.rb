@@ -33,7 +33,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -59,9 +59,10 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
+    @group = Group.find_by_id(params[:id])
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
+      format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,7 +70,6 @@ class GroupsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
