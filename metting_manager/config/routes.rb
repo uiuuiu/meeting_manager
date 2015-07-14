@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :users do            #tao moi quan he trong chung
     resources :groups do         #1 user co nhieu group
       resources :memberlists do  #1 group co nhieu memberlists
+        resources :profiles do
+        end
       end
     end
   end
