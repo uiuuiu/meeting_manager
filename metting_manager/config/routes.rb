@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :groups
+  resources :groups
   get 'groups/index'
 
   get 'users/index'
@@ -10,6 +11,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+  resources :users do            #tao moi quan he trong chung
+    resources :groups do         #1 user co nhieu group
+      resources :memberlists do  #1 group co nhieu memberlists
+      end
+    end
+  end
   resources :time_orders do
   end
   resources :welcome do
@@ -21,7 +28,6 @@ Rails.application.routes.draw do
     get 'profile'
     post 'add'
   end
-
   resources :profiles do
     get 'show'
   end

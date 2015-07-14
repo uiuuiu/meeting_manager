@@ -16,14 +16,17 @@
 		<% @memlist.each do |f| %>
 		<% @user=User.find_by_id(f.user_id)%>
 		<br>
-		<%= link_to "#{@user.email}",group_path%>
+
+		<%= link_to "#{@user.email}",user_group_memberlist_path(current_user,@group,f)%>
+		 <td><%= link_to 'Destroy', user_group_memberlist_path(current_user,@group,f), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<%end%>
 		<%else%>
 		group chua co thanh vien nao
 		<%end%>
         <br>
 		<br>
-		
 </div>
+
+<%= link_to "addmember", new_user_group_memberlist_path(current_user,@group)%>
 <%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<%= link_to 'Back', user_groups_path(current_user) %>
