@@ -22,4 +22,8 @@
 	<%= image_tag @profile.picture_url(:thumb) if @profile.picture? %>
 </div>
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
+<% if @group != nil %>
+<%= link_to 'Back', user_group_path(current_user,@group) %>
+<%else%>
 <%= link_to 'Back', profiles_path %>
+<%end%>
