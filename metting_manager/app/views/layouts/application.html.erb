@@ -46,9 +46,7 @@
   <div class="row">
     <div class="col-md-2">
       <div class="picture">
-        <% if current_user && current_user.profile %>
-        <%= image_tag current_user.profile.picture_url(:thumb) if current_user.profile.picture?%>
-        <% end %>
+       
       </div>
     </div>
     <div class="col-md-10">
