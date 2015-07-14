@@ -1,5 +1,6 @@
 class TimeOrdersController < ApplicationController
 	def new
+		@time_order		=		TimeOrder.new
 		list 			= 		Array.new
 		days 			= 		Array.new
 		months 			= 		Array.new
@@ -47,10 +48,9 @@ class TimeOrdersController < ApplicationController
 			timeend = f.max_by{|a| a[:ids]}[:objtime]
 			length = f.count
 			cellid = f.min_by{|a| a[:ids]}[:ids]
-			binding.pry
 			tior = TimeOrder.create(:user_id => current_user.id, :time_start => timestart, :time_end => timeend, :length => length, :cellid => cellid)
 		end
-		orders = TimeOrder.all
+		@orders = TimeOrder.all
 		# binding.pry
 		# (objlist.size-1).times do
 		# 	min = objlist.min_by{|a| a[:ids]}
