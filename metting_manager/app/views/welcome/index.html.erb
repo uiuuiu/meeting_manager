@@ -78,9 +78,10 @@ table td.highlighted {
     .mousedown(function (e) {
       isMouseDown = true;
       $(this).toggleClass("highlighted");
+      
       columnNumber = $(e.target).index() + 1;
       headerText = $('th:nth-child(' + columnNumber + ')').text();
-      dayytime = $(this).siblings(":first").text()+" "+headerText;
+      dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
       if($(this).is(".highlighted")) 
       {
         list.push(dayytime);
@@ -98,11 +99,27 @@ table td.highlighted {
       isHighlighted = $(this).hasClass("highlighted");
       return false; // prevent text selection
     })
-    .mouseover(function () {
+    .mouseover(function (e) {
       if (isMouseDown) {
         $(this).toggleClass("highlighted", isHighlighted);
-        $(this).text($(this).text() == "DON'T PUSH ME" ? "PUSH ME": "DON'T PUSH ME");
-      }
+        columnNumber = $(e.target).index() + 1;
+        headerText = $('th:nth-child(' + columnNumber + ')').text();
+        dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
+        if($(this).is(".highlighted")) 
+        {
+          list.push(dayytime);
+          $('#daytime').val(list);
+        }
+        else
+        {
+          for (var i=list.length-1; i>=0; i--) {
+          if (list[i] === dayytime) {
+              list.splice(i, 1);
+              $('#daytime').val(list);
+            }
+          }
+        }
+        }
     });
 
   $(document)
