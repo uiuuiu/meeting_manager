@@ -4,15 +4,15 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-	  	if current_user
-	  		@groups = current_user.groups
-	  	end
+   if current_user
+        @groups = current_user.groups
+      end
   end
+
   # GET /groups/1
   # GET /groups/1.json
   def show
-  	#binding.pry
-  	  @group = current_user.groups.find_by_id(params[:id])
+      @group = current_user.groups.find_by_id(params[:id])
       @listmembers = @group.memberlists
   end
 
@@ -23,6 +23,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
+    @group = Group.find_by_id(params[:id])
   end
 
   # POST /groups
@@ -32,7 +33,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -40,6 +41,7 @@ class GroupsController < ApplicationController
       end
     end
   end
+
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
@@ -57,9 +59,10 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
+    @group = Group.find_by_id(params[:id])
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
+      format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,7 +70,6 @@ class GroupsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
