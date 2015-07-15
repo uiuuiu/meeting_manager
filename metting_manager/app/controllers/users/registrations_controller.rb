@@ -22,7 +22,6 @@ before_filter :configure_account_update_params, only: [:update]
 
   # PUT /resource
   def update
-    binding.pry
     super
   end
 
@@ -54,7 +53,6 @@ before_filter :configure_account_update_params, only: [:update]
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    binding.pry
     Profile.create_profile(current_user.id,params[:profile][:name])
     root_path(resource)
   end
