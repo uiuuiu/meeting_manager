@@ -229,3 +229,45 @@ assigment_list:
 -
   user_id: 1
   role_id: 3
+
+profile_list:
+-
+  name: chuong
+  level: nv
+  user_id: 1
+-
+  name: phuc
+  level: nv
+  user_id: 2
+-
+  name: luong
+  level: nv
+  user_id: 3
+-
+  name: tien
+  level: intership
+  user_id: 4
+-
+  name: son
+  level: intership
+  user_id: 5
+-
+  name: chien
+  level: intership
+  user_id: 6
+-
+  name: duydy
+  level: leader
+  user_id: 7
+-
+  name: messi
+  level: leader
+  user_id: 8
+-
+  name: ronaldo
+  level: giam doc
+  user_id: 9
+-
+  name: congphuong
+  level: truy na
+  user_id: 10
