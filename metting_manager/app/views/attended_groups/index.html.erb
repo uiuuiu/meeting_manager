@@ -6,7 +6,7 @@
         <% if @at_group!=nil&&@at_group.size>0 %>
           <% @at_group.each do |f| %>
             <li>
-            <%=link_to "#{f.name}",group_profile_path(f.id)%>
+            <%=link_to "#{f.name}",user_group_path(f.user_id, f.id)%>
             </li>
             <br>
           <%end%>
