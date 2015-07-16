@@ -1,5 +1,6 @@
 class TimeOrdersController < ApplicationController
 	def new
+		idlist 			=		Array.new
 		@time_order		=		TimeOrder.new
 		list 			= 		Array.new
 		days 			= 		Array.new
@@ -25,6 +26,9 @@ class TimeOrdersController < ApplicationController
 			:ids => arr[4].to_i
 			}
 			objlist.push(obj)
+		end
+		objlist.each do |f|
+			Listid.create(:idcell => f[:ids])
 		end
 		objlist = objlist.sort_by{|f| f[:ids]%100}
 		c = objlist.first[:ids]%100
