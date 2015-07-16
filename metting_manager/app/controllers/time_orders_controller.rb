@@ -1,5 +1,7 @@
 class TimeOrdersController < ApplicationController
 	def new
+		idlist 			=		Array.new
+		@time_order		=		TimeOrder.new
 		list 			= 		Array.new
 		days 			= 		Array.new
 		months 			= 		Array.new
@@ -12,31 +14,67 @@ class TimeOrdersController < ApplicationController
 		list 	= 		params[:time_order][:time_signed].split(",")
 		list.each do |f|
 			arr = f.split(" ")
-			a = Time.new
+			a = DateTime.new
 			# times.push(arr[0].to_i)
 			# months.push(arr[1].to_i)
 			# years.push(arr[2].to_i)
 			# days.push(arr[3].to_i)
-			datetime = arr[2]+"-"+arr[1]+"-"+arr[3]+" "+arr[0]
-			a = Time.parse(datetime);
+			# datetime = arr[2]+"-"+arr[1]+"-"+arr[3]+"T"+arr[0]
+			a = DateTime.new(arr[2].to_i,arr[1].to_i,arr[3].to_i,arr[0].to_i,0,0);
 			obj = {
 		    :objtime => a, 
 			:ids => arr[4].to_i
 			}
 			objlist.push(obj)
 		end
-		(objlist.size-1).times do
-			min = objlist.min_by{|a| a[:ids]}
-			timelist.push(min)
-			objlist.delete_at(objlist.index(min))
-			if ((min[:ids]+1) == objlist.min_by{|a| a[:ids]}[:ids])
-				min = objlist.min_by{|a| a[:ids]}
-				timelist.push(min)
-			else
-				timeorder_list.push(timelist)
-				timelist.clear
-			end
+		objlist.each do |f|
+			Listid.create(:idcell => f[:ids])
 		end
-		binding.pry
+		objlist = objlist.sort_by{|f| f[:ids]%100}
+		c = objlist.first[:ids]%100
+		c1 = objlist.last[:objtime]
+		aa = Array.new
+		i = 0
+		objlist.each{|f|
+					if f[:ids]%100 != c
+						timelist[i] = aa
+						aa = Array.new
+						c = f[:ids]%100
+						i = i+1	
+					end
+					if f[:objtime] == c1
+						timelist[i] = aa	
+					end
+					aa.push(f)
+		}
+		timelist.each do |f|
+			timestart = f.min_by{|a| a[:ids]}[:objtime]
+			timeend = f.max_by{|a| a[:ids]}[:objtime]
+			length = f.count
+			cellid = f.min_by{|a| a[:ids]}[:ids]
+			tior = TimeOrder.create(:user_id => current_user.id, :time_start => timestart, :time_end => timeend, :length => length, :cellid => cellid)
+		end
+		@orders = TimeOrder.all
+		# binding.pry
+		# (objlist.size-1).times do
+		# 	min = objlist.min_by{|a| a[:ids]}
+		# 	objlist.delete_at(objlist.index(min))
+		# 	if((min[:ids]%100) == objlist.min_by{|a| a[:ids]}[:ids]%100)
+		# 		if ((min[:ids]/100) == (objlist.min_by{|a| a[:ids]}[:ids]/100 +1))
+		# 			min == 
+		# 		end
+			# end
+			# (objlist.size-1).times do
+			# min = objlist.min_by{|a| a[:ids]}
+			# timelist.push(min)
+			# objlist.delete_at(objlist.index(min))
+			# objlist.each do |f|
+			# if ((min[:ids]%100) == f[:ids]%100)
+			# 	min = objlist.min_by{|a| a[:ids]}
+			# 	timelist.push(min)
+			# else
+			# 	timeorder_list.push(timelist)
+			# 	timelist.clear
+			# end
 	end
 end
