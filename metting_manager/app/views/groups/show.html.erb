@@ -1,6 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <div>
+<%= form_tag "/users/search", method: :post %>
+<%= label_tag "name"%><td><br>
+<%= text_field_tag :name %><br>
+<%= hidden_field_tag :group_id, @group.id %>
+<%= submit_tag "let go"%><br>
+<% @users = Array.new %>  <!-- khai bao 1 mang users moi de luu lai -->
+<% if !params[:list].nil? %> <!-- neu prams khac nil thi ko thuc hien -->
+<%   params[:list].each do |l| %><!-- voi moi phan tu list ta lam l-->
+<% @users.push(User.find_by_id(l)) %><!--dua vao moi @user la 1 id user-->
+<%   end %>
+<% end %>
+<% if !@users.nil? %> 
+<%   @users.each do |u| %><!--voi moi users ta hien name cua chung -->
+	     <div><%= u.profile.name %></div>
+<%    end %>
+<% end %>
 	thong tin group
 	<br>
 	name: 
