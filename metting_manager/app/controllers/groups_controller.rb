@@ -9,7 +9,6 @@ class GroupsController < ApplicationController
       end
     # @groups = Group.all
   end
-
   # GET /groups/1
   # GET /groups/1.json
   def show
