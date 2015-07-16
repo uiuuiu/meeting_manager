@@ -9,19 +9,23 @@
       </ul>
     </div>
   <% end %>
-  
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
+
+  <div class="field"><br>
     <%= f.label :level %><br>
     <%= f.text_field :level %>
   </div>
-  <div class="picture">
+
+  <div class="picture"><br>
+    <%= f.label :avatar %><br>
     <%= f.file_field :picture %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="actions">  <br>
+    <%= f.submit "update",:class => "btn btn-primary"%>
   </div>
+
 <% end %>

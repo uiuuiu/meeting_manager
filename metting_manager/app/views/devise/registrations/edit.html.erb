@@ -1,7 +1,7 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-<%= form_for(@user, as: resource_name,url: edit_user_registration_path(@user), html: { method: :put }) do |f| %>
+<%= form_for(@user, as: resource_name,url: registration_path(@user), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
-
+  <!-- chinh user -->
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
@@ -25,33 +25,15 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
-
-  <%= fields_for(@profile) do |u| %>
-  <div class="field">
-    <%= u.label :name %><br>
-    <%= u.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= u.label :level %><br>
-    <%= u.text_field :level %>
-  </div>
-
-  <div class="picture">
-  <br>
-    <%= u.file_field :picture %>
-  <br>
-  </div>
-
-  <% end %>
   
   <div class="actions">
-    <%= f.submit "Update" %>
+  <br>
+    <%= f.submit "Update",:class  => "btn btn-primary" %>
   </div>
 <% end %>
   
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete ,:class  => "btn btn-primary"%></p>
 
 <%= link_to "Back", :back %>

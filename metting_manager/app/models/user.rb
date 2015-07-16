@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
    has_many :groups
    has_one :profile
    
+   def self.create_user(user)
+     User.create(email: user[:email],password: user[:password])
+   end
+   
 end
