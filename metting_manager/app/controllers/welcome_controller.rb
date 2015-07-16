@@ -1,6 +1,9 @@
 class WelcomeController < ApplicationController
 	def index
+    
 		@time_order = TimeOrder.new
+    @orders = TimeOrder.all
+    @idlist = Listid.all
 	end
 
 	def new 
