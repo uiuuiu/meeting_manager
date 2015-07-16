@@ -18,7 +18,7 @@
 	<%= image_tag(@profile.picture_url, :width => 600) if @profile.picture.present? %>
 </div>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Edit', edit_profile_path(@profile,:user_id => @profile.user_id) %> |
 <% if @group != nil %>
 <%= link_to 'Back', user_group_path(current_user,@group) %>
 <%else%>

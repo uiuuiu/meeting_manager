@@ -48,17 +48,97 @@
       </div>
 </nav>
 <div class="code">
-<div class="container">
-  <div class="row">
-    <div class="col-md-2">
-      <div class="picture">
-       
+<!--toan bo !-->
+<div class="container" style="width:100%;height:100%;padding-left: 10px;border: 1px solid; border-color: green; width: 100%" >
+<!--khung ben phai !-->
+    <div class="col-md-2" style="padding-top: 5px;">
+      <% if current_user!=nil %>
+      <!-- avatar -->
+        <div class="picture" >
+
+        <div style="padding-left:-10px">
+          <%= link_to profile_path(current_user.profile, :user_id => current_user.id)do %>
+            <img src="<%= current_user.profile.picture %>" class="img-circle" style=" width:150px;height:200px;">
+          <% end %>
+        </div>
+
+        <div style="margin-left: -25px;padding-left: 25%;color: blue;border-bottom: 2px solid;border-color: green;width: 225px">
+          name: <%=current_user.profile.name%><br>
+          level: <%=current_user.profile.level%>
+        </div>
+
+        </div>
+      <!-- end avatar -->
+
+      <!-- group -->
+      <div id='group_drop' style="margin-left: -25px;border-bottom: 2px solid;border-color: green;width: 225px">
+        <% @group = Group.where(user_id: current_user.id) %>
+          <li class="mnav-ul-li">
+            <%= button_tag "my group",:style => "width: 225px",:class => "btn btn-info btn-sm"%>
+            <ul class='mnav-ul-ul'>
+              <% if @group!=nil&&@group.size>0 %>
+                <% @group.each do |f| %>
+                  <li>
+                  <%=link_to "#{f.name}",user_group_path(current_user, f)%>
+                  </li>
+                <%end%>
+                  <li>
+                  <%= link_to 'New Group', new_user_group_path(current_user) %>
+                  </li>
+              <%end%>
+           </ul>
+          </li>
+      <script>
+        $("#group_drop")
+        .on('click', '.mnav-ul-li', function(){
+        $(this).parent().find('ul:first > li').slideToggle();
+        $(this).parent().find('ul:first > li').css({ 
+            "display": "block",
+            "width": "200px", 
+           });
+        });    
+      </script>
       </div>
+      <!-- end group -->
+
+      <!-- attend-group -->
+        <div id='atten_group_drop' style="margin-left: -25px;border-bottom: 2px solid;border-color: green;width: 225px">
+        <% @at_group = Group.where(user_id: current_user.id) %>
+          <li class="mnav-ul-li">
+            <%= button_tag "atten group",:style => "width: 225px",:class => "btn btn-info btn-sm"%>
+            <ul class='mnav-ul-ul'>
+              <% if @at_group!=nil&&@at_group.size>0 %>
+                <% @at_group.each do |f| %>
+                  <li>
+                  <%=link_to "#{f.name}",user_group_path(current_user, f)%>
+                  </li>
+                <%end%>
+              <%end%>
+           </ul>
+          </li>
+      <script>
+        $("#atten_group_drop")
+        .on('click', '.mnav-ul-li', function(){
+        $(this).parent().find('ul:first > li').slideToggle();
+        $(this).parent().find('ul:first > li').css({ 
+            "display": "block",
+            "width": "200px", 
+           });
+        });    
+      </script>
+      </div>
+
+        <div>abc
+        
+        </div>
+
     </div>
-    <div class="col-md-10">
+    <%end%>
+    <!-- khung ben trai -->
+    <div class="col-md-10"  style="border-left: 5px solid;min-height: 600px; border-color: green; height:100%;">
       <%= yield %>
     </div>
-  </div>        
+     
 </div><!-- /.container -->
 </div> <!--code!-->
 </body>
