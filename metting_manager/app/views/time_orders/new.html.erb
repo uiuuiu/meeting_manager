@@ -1,0 +1,112 @@
+<table id='our_table'>
+  <thead>
+       <tr>
+       
+           <th></th>
+          <% @beginning_of_month = Date.civil(2009, 12, 1) %>
+          <% @end_of_month = Date.civil(2009, 12, -1) %>
+
+          <% (@beginning_of_month..@end_of_month).each do |d| %>
+          <th><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
+           <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% time = 8 %>
+        <% tableid = 1 %>
+        <% tam = 0 %>
+        <% 11.times do %>
+        <% t = true %>
+        <tr>
+            <th><%= "#{time}:00" %></th>
+            <% time = time +1 %>
+          	<% (@beginning_of_month..@end_of_month).each do |d| %>
+          	<% @orders.each do |f| %>
+          	<% if f.cellid == tam*100+ d.day %>
+          	<% t = false %>
+          	<td id="<%= tam*100+ d.day %>" colspan ="<%= f.length %>"></td>
+          	<% end %>
+          	<% end %>
+          	<% if t %>
+          	<td id="<%= tam*100+ d.day %>"></td>
+          	<% end %>
+            <% tableid = tableid +1 %>    
+            <% t = true %>
+          	<% end %>
+        </tr>
+        <% tam = tam +1 %>
+        <% end %>
+    </tbody>
+</table>
+  <script type="text/javascript" charset="utf-8">
+    $(function () {
+  var isMouseDown = false,
+    isHighlighted;
+    list = new Array();   
+  $("#our_table td")
+    .mousedown(function (e) {
+      isMouseDown = true;
+      $(this).toggleClass("highlighted");
+      
+      columnNumber = $(e.target).index() + 1;
+      headerText = $('th:nth-child(' + columnNumber + ')').text();
+      dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
+      if($(this).is(".highlighted")) 
+      {
+        list.push(dayytime);
+        $('#daytime').val(list);
+      }
+      else
+      {
+        for (var i=list.length-1; i>=0; i--) {
+        if (list[i] === dayytime) {
+            list.splice(i, 1);
+            $('#daytime').val(list);
+          }
+        }
+      }
+      isHighlighted = $(this).hasClass("highlighted");
+      return false; // prevent text selection
+    })
+    .mouseover(function (e) {
+      if (isMouseDown) {
+        $(this).toggleClass("highlighted", isHighlighted);
+        columnNumber = $(e.target).index() + 1;
+        headerText = $('th:nth-child(' + columnNumber + ')').text();
+        dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
+        if($(this).is(".highlighted")) 
+        {
+          list.push(dayytime);
+          $('#daytime').val(list);
+        }
+        else
+        {
+          for (var i=list.length-1; i>=0; i--) {
+          if (list[i] === dayytime) {
+              list.splice(i, 1);
+              $('#daytime').val(list);
+            }
+          }
+        }
+        }
+    });
+
+  $(document)
+    .mouseup(function () {
+      isMouseDown = false;
+    });
+    $("#send_list").click(function(){
+      $.ajax({
+          type: 'GET',
+          url: 'welcome/new',
+          dataType: 'script',
+          data: {order: list}
+
+        });
+    });
+});
+  </script>
+  <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true}, url: new_time_order_path, method: :get) do |f| %>
+    <%= f.hidden_field :time_signed, :id => "daytime" %>
+    <%= f.submit "Create", class: "btn btn-primary" %>  
+  <% end %>
