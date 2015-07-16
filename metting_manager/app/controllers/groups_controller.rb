@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
    if current_user
         @groups = current_user.groups
       end
+    # @groups = Group.all
   end
 
   # GET /groups/1

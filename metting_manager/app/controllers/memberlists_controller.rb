@@ -3,6 +3,9 @@ class MemberlistsController < ApplicationController
     @group = Group.find_by_id(params[:group_id]) 
     @member = Memberlist.new
   end
+  def search
+  @member = Memberlist.search params[:search]
+end
   def show
     #binding.pry
   	@member = Memberlist.find_by_id(params[:id])

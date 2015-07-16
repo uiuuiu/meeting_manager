@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :groups
   resources :groups
   get 'groups/index'
+
+  get 'memberlists/search'
+  post '/memberlists/search'
   get 'users/index'
   devise_for :users, controllers: {
     sessions: "users/sessions",
@@ -30,6 +33,7 @@ Rails.application.routes.draw do
   resources :groups do
     get 'profile'
     post 'add'
+
   end
   resources :profiles do
     get 'show'
