@@ -1,5 +1,6 @@
 class TimeOrdersController < ApplicationController
 	def new
+		
 		idlist 			=		Array.new
 		@time_order		=		TimeOrder.new
 		list 			= 		Array.new

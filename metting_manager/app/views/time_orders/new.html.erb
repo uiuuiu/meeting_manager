@@ -1,36 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title></title>
-  <style type="text/css" media="screen">
-    table td {
-  width:100px;
-  height:100px;
-  text-align:center;
-  vertical-align:middle;
-  background-color:#ccc;
-  border:1px solid #fff;
-}
-table td.highlighted {
-  background-color:#999;
-}
-  </style>
-</head>
-<body>
-  <% @daytime = Array.new %>
-  <% @tam = "" %>
 <table id='our_table'>
   <thead>
        <tr>
+       
            <th></th>
           <% @beginning_of_month = Date.civil(2009, 12, 1) %>
           <% @end_of_month = Date.civil(2009, 12, -1) %>
 
           <% (@beginning_of_month..@end_of_month).each do |d| %>
-          <th style="witdh: 10px"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
+          <th><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
            <% end %>
         </tr>
     </thead>
@@ -43,22 +20,19 @@ table td.highlighted {
         <tr>
             <th><%= "#{time}:00" %></th>
             <% time = time +1 %>
-            <% (@beginning_of_month..@end_of_month).each do |d| %>
-            <% @orders.each do |f| %>
-            <% if f.cellid == tam*100+ d.day %>
-            <% t = false %>
-            <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>"></td>
-            <% end %>
-            <% end %>
-            <% if t %>
-            <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
-            <% else %>
-            <td id="<%= tam*100+ d.day %>"></td>
-            <% end %>
-            <% end %>
+          	<% (@beginning_of_month..@end_of_month).each do |d| %>
+          	<% @orders.each do |f| %>
+          	<% if f.cellid == tam*100+ d.day %>
+          	<% t = false %>
+          	<td id="<%= tam*100+ d.day %>" colspan ="<%= f.length %>"></td>
+          	<% end %>
+          	<% end %>
+          	<% if t %>
+          	<td id="<%= tam*100+ d.day %>"></td>
+          	<% end %>
             <% tableid = tableid +1 %>    
             <% t = true %>
-            <% end %>
+          	<% end %>
         </tr>
         <% tam = tam +1 %>
         <% end %>
@@ -94,7 +68,6 @@ table td.highlighted {
       isHighlighted = $(this).hasClass("highlighted");
       return false; // prevent text selection
     })
-    
     .mouseover(function (e) {
       if (isMouseDown) {
         $(this).toggleClass("highlighted", isHighlighted);
@@ -137,7 +110,3 @@ table td.highlighted {
     <%= f.hidden_field :time_signed, :id => "daytime" %>
     <%= f.submit "Create", class: "btn btn-primary" %>  
   <% end %>
-  <%=  link_to "send daytime", new_welcome_path(:type => @daytime) %>
-  <%=  link_to "Groups", groups_path %>
-</body>
-</html>
