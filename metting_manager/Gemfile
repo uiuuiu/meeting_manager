@@ -43,4 +43,6 @@ group :development, :test do
   gem 'spring'
   gem 'devise'
   gem 'pry-rails'
+  gem 'carrierwave'
+  gem 'thin'
 end
