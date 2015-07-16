@@ -3,11 +3,13 @@ class MemberlistsController < ApplicationController
     @group = Group.find_by_id(params[:group_id]) 
     @member = Memberlist.new
   end
+
   def show
     #binding.pry
   	@member = Memberlist.find_by_id(params[:id])
     @user = User.find_by_id(@member.user_id)
   end
+
 	def destroy
 		@memberlist = Memberlist.find_by_id(params[:id])
 		@memberlist.destroy
@@ -16,6 +18,7 @@ class MemberlistsController < ApplicationController
       	format.json { head :no_content }
     end
   end
+
     def create
       #binding.pry
     @memberlist = Memberlist.new(:user_id => params[:memberlist][:user_id], :group_id => params[:group_id])
@@ -30,4 +33,5 @@ class MemberlistsController < ApplicationController
       end
     end
   end
+
 end
