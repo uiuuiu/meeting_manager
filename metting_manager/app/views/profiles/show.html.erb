@@ -14,7 +14,6 @@
   <strong>Picture:</strong>
   <%= @profile.picture %>
 </p>
-
 <div class="picture">
 	<%= image_tag(@profile.picture_url, :width => 600) if @profile.picture.present? %>
 </div>
