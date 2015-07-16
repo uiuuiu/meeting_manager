@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   resources :groups
   get 'groups/index'
 
-  get 'memberlists/search'
-  post '/memberlists/search'
+  get 'users/search'
+  post 'users/search'
   get 'users/index'
   devise_for :users, controllers: {
     sessions: "users/sessions",
