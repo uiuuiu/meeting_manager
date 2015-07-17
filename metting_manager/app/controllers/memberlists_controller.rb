@@ -13,7 +13,6 @@ class MemberlistsController < ApplicationController
       redirect_to user_group_path(@this_group.user_id,@this_group, :list => @list)
     end
   end
-  
 #   def search
 #   @member = Memberlist.search params[:search]
 # end
