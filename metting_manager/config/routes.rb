@@ -22,7 +22,6 @@ Rails.application.routes.draw do
       post 'memberlists/add'       #1 user co nhieu group
       resources :memberlists do  #1 group co nhieu memberlists
         resources :profiles do
-
         end
       end
     end

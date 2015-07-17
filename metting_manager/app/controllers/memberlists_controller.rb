@@ -3,6 +3,7 @@ class MemberlistsController < ApplicationController
     @group = Group.find_by_id(params[:group_id]) 
     @member = Memberlist.new
   end
+  
   def add 
     @list = params[:list]
     @this_user = User.find_by_id(params[:user_id])
