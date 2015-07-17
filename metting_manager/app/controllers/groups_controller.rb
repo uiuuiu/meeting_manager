@@ -7,8 +7,8 @@ class GroupsController < ApplicationController
    if current_user
         @groups = current_user.groups
       end
+    # @groups = Group.all
   end
-
   # GET /groups/1
   # GET /groups/1.json
   def show
@@ -65,6 +65,10 @@ class GroupsController < ApplicationController
       format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    #binding.pry
   end
 
   private

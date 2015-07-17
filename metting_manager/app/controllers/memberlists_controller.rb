@@ -3,7 +3,20 @@ class MemberlistsController < ApplicationController
     @group = Group.find_by_id(params[:group_id]) 
     @member = Memberlist.new
   end
-
+  def add 
+    @list = params[:list]
+    @this_user = User.find_by_id(params[:user_id])
+    @this_group = Group.find_by_id(params[:group_id])
+    @member = User.find_by_id(params[:format])
+    if Memberlist.create(:group_id => @this_group.id, :user_id => @member.id)
+      @list.delete("#{@member.id}")
+      redirect_to user_group_path(@this_group.user_id,@this_group, :list => @list)
+    end
+  end
+  
+#   def search
+#   @member = Memberlist.search params[:search]
+# end
   def show
     #binding.pry
   	@member = Memberlist.find_by_id(params[:id])
