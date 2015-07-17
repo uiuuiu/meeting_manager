@@ -57,7 +57,7 @@
         <div class="picture" >
 
         <div style="padding-left:-10px">
-          <%= link_to profile_path(current_user.profile, :user_id => current_user.id)do %>
+          <%= link_to user_profile_path(current_user, current_user.profile)do %>
             <img src="<%= current_user.profile.picture %>" class="img-circle" style=" width:150px;height:200px;">
           <% end %>
         </div>
@@ -73,8 +73,8 @@
       <!-- group -->
       <div id='group_drop' style="margin-left: -25px;border-bottom: 2px solid;border-color: green;width: 225px">
         <% @group = Group.where(user_id: current_user.id) %>
-          <li class="mnav-ul-li">
-            <%= button_tag "my group",:style => "width: 225px",:class => "btn btn-info btn-sm"%>
+          <li class="mnav-ul-li" style="display: inline-block">
+            <%= button_tag "my group",:style => "width: 190px",:class => "btn btn-info btn-sm"%>
             <ul class='mnav-ul-ul'>
               <% if @group!=nil&&@group.size>0 %>
                 <% @group.each do |f| %>
@@ -82,12 +82,10 @@
                   <%=link_to "#{f.name}",user_group_path(current_user, f)%>
                   </li>
                 <%end%>
-                  <li>
-                  <%= link_to 'New Group', new_user_group_path(current_user) %>
-                  </li>
               <%end%>
            </ul>
           </li>
+          <div style="display: inline-block"><%= link_to '+', new_user_group_path(current_user),:class => "btn btn-info btn-sm",:style => "width:30px;display: inline-block;" %></div>
       <script>
         $("#group_drop")
         .on('click', '.mnav-ul-li', function(){

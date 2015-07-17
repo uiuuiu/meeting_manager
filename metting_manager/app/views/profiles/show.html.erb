@@ -2,23 +2,23 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @profile.name %>
+  <%= @this_profile.name %>
 </p>
 
 <p>
   <strong>Level:</strong>
-  <%= @profile.level %>
+  <%= @this_profile.level %>
 </p>
 
 <p>
   <strong>Picture:</strong>
-  <%= @profile.picture %>
+  <%= @this_profile.picture %>
 </p>
 <div class="picture">
 	<%= image_tag(@profile.picture_url, :width => 600) if @profile.picture.present? %>
 </div>
 
-<%= link_to 'Edit', edit_profile_path(@profile,:user_id => @profile.user_id) %> |
+<%= link_to 'Edit', edit_user_profile_path(@this_profile.user_id, @this_profile)%> |
 <% if @group != nil %>
 <%= link_to 'Back', user_group_path(current_user,@group) %>
 <%else%>
