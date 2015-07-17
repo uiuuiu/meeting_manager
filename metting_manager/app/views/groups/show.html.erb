@@ -17,7 +17,7 @@
 		<% @profile=Profile.find_by_user_id(f.user_id)%>
 		<br>
 
-		<%= link_to "#{@profile.name}",user_group_memberlist_profile_path(current_user,@group,f,@profile)%>
+		<%= link_to "#{@profile.name}",user_group_memberlist_profile_path(f.user_id,@group,f,@profile)%>
 		 <td><%= link_to 'Destroy', user_group_memberlist_path(current_user,@group,f), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<%end%>
 		<%else%>

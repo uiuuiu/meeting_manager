@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   resources :users do            #tao moi quan he trong chung
+    resources :profiles
     resources :groups do         #1 user co nhieu group
       resources :memberlists do  #1 group co nhieu memberlists
         resources :profiles do

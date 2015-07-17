@@ -10,7 +10,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @profile = Profile.find_by_user_id(params[:user_id].to_i)
+    @this_user = User.find_by_id(params[:user_id])
+    @this_profile = @this_user.profile
   end
 
   # GET /profiles/new
@@ -20,7 +21,8 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    @profile = Profile.find_by_user_id(params[:user_id].to_i)
+    @this_user = User.find_by_id(params[:user_id])
+    @this_profile = @this_user.profile
   end
 
   # POST /profiles
@@ -44,7 +46,7 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to profile_path(current_user.profile, :user_id => current_user.id), notice: 'Profile was successfully updated.' }
+        format.html { redirect_to user_profile_path(@profile.user_id, @profile), notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
         format.html { render :edit }
@@ -55,23 +57,15 @@ class ProfilesController < ApplicationController
 
   # DELETE /profiles/1
   # DELETE /profiles/1.json
-  def destroy
-    @profile.destroy
-    respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find_by_name(params[:id])
+      @profile = Profile.find_by_user_id(params[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      binding.pry
       params.require(:profile).permit(:name, :level, :picture)
     end
 end
