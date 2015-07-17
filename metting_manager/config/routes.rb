@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'users/search'
   post 'users/search'
   get 'users/index'
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: 'users/registrations',
@@ -16,9 +17,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   resources :users do            #tao moi quan he trong chung
-    resources :groups do         #1 user co nhieu group
+    resources :groups do  
+      get 'memberlists/add'
+      post 'memberlists/add'       #1 user co nhieu group
       resources :memberlists do  #1 group co nhieu memberlists
         resources :profiles do
+
         end
       end
     end
@@ -32,7 +36,6 @@ Rails.application.routes.draw do
 
   resources :groups do
     get 'profile'
-    post 'add'
 
   end
   resources :profiles do

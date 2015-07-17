@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-
 <div>
 <%= form_tag "/users/search", method: :post %>
 <%= label_tag "name"%><td><br>
@@ -12,9 +11,15 @@
 <% @users.push(User.find_by_id(l)) %><!--dua vao moi @user la 1 id user-->
 <%   end %>
 <% end %>
+<br>
 <% if !@users.nil? %> 
-<%   @users.each do |u| %><!--voi moi users ta hien name cua chung -->
-	     <div><%= u.profile.name %></div>
+<%   @users.each do |u| %>
+<!--voi moi users ta hien name cua chung -->
+			<% if u != current_user %>
+	     <div><%= u.profile.name %>
+	     <%= link_to "add", user_group_memberlists_add_path(@group.user_id, @group, u.id, :list => @users) %>
+	     </div>
+	     <% end%>
 <%    end %>
 <% end %>
 	thong tin group

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def index
+    
   end
+
   def search
   	@profiles = Profile.where(:name => params[:name]) #lay param chuyen len
   	@users = Array.new #khoi tao 1 mang @user moi
