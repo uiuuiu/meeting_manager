@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-
+    @group.user_id = current_user.id
     respond_to do |format|
       if @group.save
         format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully created.' }

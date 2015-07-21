@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715051445) do
+ActiveRecord::Schema.define(version: 20150717144436) do
 
   create_table "assigments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -29,7 +29,8 @@ ActiveRecord::Schema.define(version: 20150715051445) do
   end
 
   create_table "listids", force: :cascade do |t|
-    t.integer "idcell", limit: 4
+    t.integer  "idcell",      limit: 4
+    t.datetime "time_signed"
   end
 
   create_table "memberlists", force: :cascade do |t|
