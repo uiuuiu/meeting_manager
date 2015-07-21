@@ -8,7 +8,7 @@ class MemberlistsController < ApplicationController
     @this_user = User.find_by_id(params[:user_id])
     @this_group = Group.find_by_id(params[:group_id])
     @member = User.find_by_id(params[:format])
-    if Memberlist.create(:group_id => @this_group.id, :user_id => @member.id)
+    if Memberlist.find_or_create_by(:group_id => @this_group.id,:user_id => @member.id)
       @list.delete("#{@member.id}")
       redirect_to user_group_path(@this_group.user_id,@this_group, :list => @list)
     end
