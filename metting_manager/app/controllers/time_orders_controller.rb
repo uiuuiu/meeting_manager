@@ -55,7 +55,7 @@ class TimeOrdersController < ApplicationController
 			cellid = f.min_by{|a| a[:ids]}[:ids]
 			tior = TimeOrder.create(:user_id => current_user.id, :time_start => timestart, :time_end => timeend, :length => length, :cellid => cellid)
 		end
-		binding.pry
+		#binding.pry
 		@orders = TimeOrder.all
 		# binding.pry
 		# (objlist.size-1).times do
