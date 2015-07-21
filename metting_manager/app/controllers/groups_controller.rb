@@ -25,7 +25,6 @@ class GroupsController < ApplicationController
   def edit
     @group = Group.find_by_id(params[:id])
   end
-
   # POST /groups
   # POST /groups.json
   def create
