@@ -29,7 +29,7 @@ class TimeOrdersController < ApplicationController
 			objlist.push(obj)
 		end
 		objlist.each do |f|
-			Listid.create(:idcell => f[:ids])
+			Listid.create(:idcell => f[:ids], :time_signed => f[:objtime])
 		end
 		objlist = objlist.sort_by{|f| f[:ids]%100}
 		c = objlist.first[:ids]%100
@@ -55,6 +55,7 @@ class TimeOrdersController < ApplicationController
 			cellid = f.min_by{|a| a[:ids]}[:ids]
 			tior = TimeOrder.create(:user_id => current_user.id, :time_start => timestart, :time_end => timeend, :length => length, :cellid => cellid)
 		end
+		binding.pry
 		@orders = TimeOrder.all
 		# binding.pry
 		# (objlist.size-1).times do

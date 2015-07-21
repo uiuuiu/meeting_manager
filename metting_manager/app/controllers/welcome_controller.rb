@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
 	def index
+    @idlist = Array.new
     if params[:get_time]
       s = params[:get_time].split('/')
       @get_time = Time.new(s[0].to_i,s[1].to_i)
@@ -9,11 +10,15 @@ class WelcomeController < ApplicationController
 		@time_order = TimeOrder.new
     @orders=Array.new
     TimeOrder.all.each{|f|
-      if f.time_start > @get_time && f.time_end < @get_time
+      if f.time_start > Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, 1) && f.time_end < Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, -1)
         @orders.push(f)
       end
     }
-    @idlist = Listid.all
+    Listid.all.each {|f|
+      if f.time_signed > Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, 1) && f.time_signed < Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, -1)
+        @idlist.push(f)
+      end
+    }
     @time = Time.now
 	end
 
