@@ -80,6 +80,7 @@
                 <% @group.each do |f| %>
                   <li>
                   <%=link_to "#{f.name}",user_group_path(current_user, f)%>
+                  <%= link_to "choice" %>
                   </li>
                 <%end%>
               <%end%>
@@ -109,6 +110,7 @@
                 <% @at_group.each do |f| %>
                   <li>
                   <%=link_to "#{f.name}",user_group_path(current_user, f)%>
+                  <%= link_to "choice" %>
                   </li>
                 <%end%>
               <%end%>

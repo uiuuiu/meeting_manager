@@ -20,7 +20,6 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
   end
-
   # GET /groups/1/edit
   def edit
     @group = Group.find_by_id(params[:id])
@@ -29,8 +28,10 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
+   #binding.pry
+   @profiles = Profile.where(:name => params[:name])
     @group = Group.new(group_params)
-
+    @group.user_id = current_user.id
     respond_to do |format|
       if @group.save
         format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully created.' }

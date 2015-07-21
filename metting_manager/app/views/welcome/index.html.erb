@@ -56,7 +56,7 @@ table td.highlighted {
           <% @end_of_month = Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, -1) %>
 
           <% (@beginning_of_month..@end_of_month).each do |d| %>
-          <% if d.day <15 %>
+          <% if d.day <17 %>
           <th style="witdh: 10px"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
           <% else %>
           <th style="witdh: 10px; display: none"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
