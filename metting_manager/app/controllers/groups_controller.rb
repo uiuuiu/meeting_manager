@@ -20,7 +20,6 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
   end
-
   # GET /groups/1/edit
   def edit
     @group = Group.find_by_id(params[:id])
