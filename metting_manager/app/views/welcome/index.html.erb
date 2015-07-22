@@ -48,15 +48,19 @@ table td.highlighted {
 <!-- end lich -->
   <% @daytime = Array.new %>
   <% @tam = "" %>
-<table id='our_table'>
+<table id='our_table' class="mytb" style="">
   <thead>
        <tr>
            <th></th>
-          <% @beginning_of_month = Date.civil(@time.strftime("%Y").to_i, @time.strftime("%m").to_i, 1) %>
-          <% @end_of_month = Date.civil(@time.strftime("%Y").to_i, @time.strftime("%m").to_i, -1) %>
+          <% @beginning_of_month = Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, 1) %>
+          <% @end_of_month = Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, -1) %>
 
           <% (@beginning_of_month..@end_of_month).each do |d| %>
+          <% if d.day <15 %>
           <th style="witdh: 10px"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
+          <% else %>
+          <th style="witdh: 10px; display: none"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
+          <% end %>
            <% end %>
         </tr>
     </thead>
@@ -64,27 +68,46 @@ table td.highlighted {
         <% time = 8 %>
         <% tableid = 1 %>
         <% tam = 0 %>
+        <% dem = 0 %>
         <% 11.times do %>
-        <% t = true %>
         <tr>
             <th><%= "#{time}:00" %></th>
             <% time = time +1 %>
+            <!-- row -->
             <% (@beginning_of_month..@end_of_month).each do |d| %>
-            <% @orders.each do |f| %>
-            <% if f.cellid == tam*100+ d.day %>
-            <% t = false %>
-            <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>"></td>
+                <% if @orders!=nil %>
+                <% if d.day < 17 %>
+                    <% @orders.each do |f| %>
+                        <% if f.cellid == tam*100+ d.day %>
+                        <% t = false %>
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>"></td>
+                        <% end %>
+                    <% end %>
+                    <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
+                    <% else %>
+                        <td id="<%= tam*100+ d.day %>"></td>
+                    <% end %> 
+                <% else %>
+                    <% @orders.each do |f| %>
+                        <% if f.cellid == tam*100+ d.day %>
+                        <% t = false %>
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none"></td>
+                        <% end %>
+                    <% end %>
+                    <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
+                    <% else %>
+                        <td id="<%= tam*100+ d.day %>" style="witdh: 10px; display: none"></td>
+                    <% end %> 
+                <% end %>
+                <% else %>
+                <% if d.day <17 %>
+                  <td id="<%= tam*100+ d.day %>"></td>
+                  <% else %>
+                  <td id="<%= tam*100+ d.day %>" style="witdh: 10px; display: none"></td>
+                  <% end %>
+                <% end %>
             <% end %>
-            <% end %>
-            <% if t %>
-            <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
-            <% else %>
-            <td id="<%= tam*100+ d.day %>"></td>
-            <% end %>
-            <% end %>
-            <% tableid = tableid +1 %>    
-            <% t = true %>
-            <% end %>
+            <!-- row -->
         </tr>
         <% tam = tam +1 %>
         <% end %>
@@ -159,6 +182,22 @@ table td.highlighted {
     });
 });
   </script>
+<script type="text/javascript">
+  function split($table, chunkSize) {
+  var cols = $("th", $table).length - 2;
+  var n = cols / chunkSize;
+
+  for (var i = 1; i <= n; i++) {
+     $("<br/>").appendTo("body");
+     var $newTable = $table.clone().appendTo("body");
+     for (var j = cols + 1; j > 1; j--) {
+         if (j + chunkSize - 1 <= chunkSize * i || j > chunkSize * i + 1) {
+             $('td:nth-child(' + j + '),th:nth-child(' + j + ')', $newTable).remove();
+         }
+     }
+  }  
+}
+</script>
   <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true}, url: new_time_order_path, method: :get) do |f| %>
     <%= f.hidden_field :time_signed, :id => "daytime" %>
     <%= f.submit "Create", class: "btn btn-primary" %>  
