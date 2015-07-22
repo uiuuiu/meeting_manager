@@ -1,10 +1,17 @@
 <p id="notice"><%= notice %></p>
 <div>
-<%= form_tag "/users/search", method: :post %>
+<%= form_tag users_search_path, method: :post %>
 <%= label_tag "name"%><td><br>
-<%= text_field_tag :name %><br>
+<%= text_field_tag :name ,"",:style => "width:600px"%>
 <%= hidden_field_tag :group_id, @group.id %>
-<%= submit_tag "let go"%><br>
+<%= submit_tag "let go",:class => "btn btn-info btn-sm"%><br>
+
+<!--  -->
+<%= link_to "addmember", new_user_group_memberlist_path(current_user,@group),:class => "btn btn-info btn-sm"%>
+<%= link_to 'Edit', edit_group_path(@group),:class => "btn btn-info btn-sm" %> 
+<%= link_to 'Back', attended_groups_path(current_user) ,:class => "btn btn-info btn-sm"%>
+<!--  -->
+
 <% @users = Array.new %>  <!-- khai bao 1 mang users moi de luu lai -->
 <% if !params[:list].nil? %> <!-- neu prams khac nil thi ko thuc hien -->
 <%   params[:list].each do |l| %><!-- voi moi phan tu list ta lam l-->
@@ -13,41 +20,28 @@
 <% end %>
 <br>
 <% if !@users.nil? %> 
-<%   @users.each do |u| %>
+  <% @users.each do |u| %>
 <!--voi moi users ta hien name cua chung -->
-			<% if u != current_user %>
-	     <div><%= u.profile.name %>
-	     <%= link_to "add", user_group_memberlists_add_path(@group.user_id, @group, u.id, :list => @users) %>
-	     </div>
-	     <% end%>
-<%    end %>
+    <% if u != current_user %>
+      <div><%= u.profile.name %>
+        <%= link_to "+", user_group_memberlists_add_path(@group.user_id, @group, u.id, :list => @users) %>
+      </div>
+    <% end%>
+  <% end %>
 <% end %>
-	thong tin group
-	<br>
-	name: 
-	<%= @group.name %>
-	<br>
-	desc: 
-	<%=@group.desc %>
-	<br>
-	<% @memlist = Memberlist.where(group_id: @group.id)%>
-		<% if @memlist.size >0 %>
-		<%= @memlist.size%> thanh vien
-		<br>
-		<% @memlist.each do |f| %>
-		<% @profile=Profile.find_by_user_id(f.user_id)%>
-		<br>
-
-		<%= link_to "#{@profile.name}",user_group_memberlist_profile_path(f.user_id,@group,f,@profile)%>
-		 <td><%= link_to 'Destroy', user_group_memberlist_path(current_user,@group,f), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-		<%end%>
-		<%else%>
-		group chua co thanh vien nao
-		<%end%>
-        <br>
-		<br>
+  thong tin group
+  <br>
+  name: 
+  <%= @group.name %>
+  <br>
+  desc: 
+  <%=@group.desc %>
+  <br>
+<!-- render -->
+ <div class="member">
+<div id = "review">
+  <%= render :partial => @group.memberlists %>
 </div>
 
-<%= link_to "addmember", new_user_group_memberlist_path(current_user,@group)%>
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', attended_groups_path(current_user) %>
+</div>
+</div>
