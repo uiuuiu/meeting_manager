@@ -11,8 +11,6 @@
     <% end %>
     <%= link_to "#{@profile.name}",user_group_memberlist_profile_path(@group.user_id,@group,memberlist,@profile)%>
     <td><%= link_to 'Destroy', user_group_memberlist_path(current_user,@group,memberlist), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<!-- dialog -->
-<!-- dialog end -->
   </div>  
 <!--  -->
 <script>
