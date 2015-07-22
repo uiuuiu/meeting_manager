@@ -1,0 +1,33 @@
+<% @profile=Profile.find_by_user_id(memberlist.user_id)%>
+    <div class="sub_member" onmouseover="bigImg(this)" onmouseout="normalImg(this)" style="border: 10px; border-color: red">
+    <%= link_to user_profile_path(memberlist.user_id, @profile)do %>
+            <%= image_tag(@profile.picture_url, :width => "100%",:height => "90%") %>
+    <% end %>
+    <%= link_to "#{@profile.name}",user_group_memberlist_profile_path(@group.user_id,@group,memberlist,@profile)%>
+    <td><%= link_to 'Destroy', user_group_memberlist_path(current_user,@group,memberlist), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <!--  -->
+  <div id ="dial" style="padding:5px 5px;margin-left:40%;text-align:center;border: 1px solid rgba(0, 0, 0, 0.3);border-radius: 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); top:40%; text-align:left;max-width:300px; display: none">                   
+       <p style="padding-left:0px">
+        <b style="color:black">Tên đề tài</b>: @kt.TenDT<br />
+        <b style="color:black">Mã đề tài</b>: @kt.MaDT<br />
+        <b style="color:black">SL sinh viên thực hiện</b>: @kt.SLSVTH<br />
+        <b style="color:black">Nội dung</b>: @kt.NoiDungDT</p>
+        <button id="close" class="close" onclick="dong(@tam)" style="font:16px Times new roman;margin-top:20px">Đóng</button>
+</div>
+  </div>  
+<!--  -->
+<script>
+function bigImg(x) {
+  x.style = "border: 10px solid";
+  x.style = "border-color: red";
+  x.style.width = "220px";
+  x.style.height = "220px";
+  $("#dial").style.display = "inline";
+}
+function normalImg(x) {
+  x.style = "border: 0px solid";
+  x.style.width = "180px";
+  x.style.height = "180px";
+}
+           
+</script>
