@@ -22,33 +22,11 @@ table td.highlighted {
 <body>
 <!-- lich -->
 <div class="container">
-<%= form_for(@a="", :html => {:class => "form-horizontal center", :multipart => true}, url: root_path, method: :get) do |f| %>
-    <div class="col-sm-6" style="height:130px;">
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker10'>
-                <%= f.text_field :get_time,:class => "form-control" %>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar">
-                    </span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker10').datetimepicker({
-                viewMode: 'years',
-                format: 'YYYY/MM'
-            });
-        });
-    </script>
-    <%= f.submit "find", class: "btn btn-primary" %> 
-  <% end %>
 </div>
 <!-- end lich -->
   <% @daytime = Array.new %>
   <% @tam = "" %>
-<table id='our_table' class="mytb" style="">
+<table id='our_table' class="mytb" style="color: GreenYellow;">
   <thead>
        <tr>
            <th></th>
@@ -204,6 +182,5 @@ table td.highlighted {
   <% end %>
   <%=  link_to "send daytime", new_welcome_path(:type => @daytime) %>
   <%=  link_to "Groups", groups_path %>
-  <% binding.pry %>
 </body>
 </html>
