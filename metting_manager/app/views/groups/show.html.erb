@@ -1,17 +1,37 @@
 <p id="notice"><%= notice %></p>
-<div>
+<div style="display: inline-block">
 <%= form_tag users_search_path, method: :post %>
-<%= label_tag "name"%><td><br>
-<%= text_field_tag :name ,"",:style => "width:600px"%>
+<!-- loai tim kiem -->
+  <%@find_style=["name","group"]%>
+  <%= select_tag(:find_style, options_for_select(
+   @find_style.collect{|u| 
+     [u] }
+     ))
+ %>
+ <!-- end loai tim kiem -->
+<%= text_field_tag :name ,"",:style => "width:50%;"%>
 <%= hidden_field_tag :group_id, @group.id %>
-<%= submit_tag "let go",:class => "btn btn-info btn-sm"%><br>
-
-<!--  -->
-<%= link_to "addmember", new_user_group_memberlist_path(current_user,@group),:class => "btn btn-info btn-sm"%>
-<%= link_to 'Edit', edit_group_path(@group),:class => "btn btn-info btn-sm" %> 
-<%= link_to 'Back', attended_groups_path(current_user) ,:class => "btn btn-info btn-sm"%>
-<!--  -->
-
+<%= submit_tag "let go",:class => "btn btn-info btn-sm"%>
+<!-- drop menu setting -->
+<style type="text/css">
+  .bs-example{
+      margin-top: -28px;
+      margin-left: 730px;
+      font: red;
+    }
+    .bs-example li a{
+      color: red;
+    }
+</style>
+<ul class="dropdown bs-example">
+  <img  src=" /uploads/setting.jpeg " data-toggle="dropdown" class="dropdown-toggle" width="15px" height="15px">
+    <ul class="dropdown-menu">
+      <li><%= link_to "add", new_user_group_memberlist_path(current_user,@group)%></li>
+      <li><%= link_to 'Edit', edit_group_path(@group) %></li>
+      <li><%= link_to 'Back', attended_groups_path(current_user) %></li>
+  </ul>
+</ul>
+<!-- end drop menu setting -->
 <% @users = Array.new %>  <!-- khai bao 1 mang users moi de luu lai -->
 <% if !params[:list].nil? %> <!-- neu prams khac nil thi ko thuc hien -->
 <%   params[:list].each do |l| %><!-- voi moi phan tu list ta lam l-->
@@ -23,8 +43,9 @@
   <% @users.each do |u| %>
 <!--voi moi users ta hien name cua chung -->
     <% if u != current_user %>
-      <div><%= u.profile.name %>
+      <div>
         <%= link_to "+", user_group_memberlists_add_path(@group.user_id, @group, u.id, :list => @users),:class => "btn btn-info btn-sm",:style => "height: 10px, padding-top: 0px"%>
+        <%= u.profile.name %>
       </div>
     <% end%>
   <% end %>
@@ -43,5 +64,4 @@
   <%= render :partial => @group.memberlists %>
 </div>
 
-</div>
 </div>

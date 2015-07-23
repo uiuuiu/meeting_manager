@@ -15,7 +15,7 @@
   }
 </style>
 <% @profile=Profile.find_by_user_id(memberlist.user_id)%>
-<% value  ="team =>" + @group.name  + "\n" + "name => " + @profile.name + "\n" + "level=> " + @profile.level%>
+<% value  = "team =>" + @group.name  + "\n" + "name => " + @profile.name + "\n" + "level=> " + @profile.level%>
     <div class="sub_member test" onmouseover="bigDiv(this)" onmouseout ="normalDiv(this)" style="border: 10px; border-color: red" data-toggle="tooltip" data-placement="top" title = "<%= value%>" >
     <%= link_to user_profile_path(memberlist.user_id, @profile) do %>
             <%= image_tag(@profile.picture_url,:class => 'myimg',:width => "100%",:height => "90%",:style => "border: 5px solid lightblue;
@@ -33,7 +33,7 @@
 <!--  -->
 <script>
 function bigDiv(x) {
-  x.style = " border-radius: 10px; border-color: red; -moz-border-radius: 10px; -webkit-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px;";
+  x.style = " border-radius: 10px; border-color: red; -moz-border-radius: 10px; -webkit-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px;box-shadow: 0px 0px 4px 4px grey;";
   x.getElementsByClassName("myimg")[0].style = "border:0px";
   // x.style = "border: 5px solid lightblue;";
   // x.style = "-moz-border-radius: 10px;";
@@ -49,7 +49,7 @@ function bigDiv(x) {
 }
 function normalDiv(x) {
    x.style = "border: 0px";
-  x.style.width = "180px";
+  x.style.width = "17%";
   x.style.height = "180px";
   x.getElementsByClassName("myimg")[0].style = "border: 5px solid lightblue;border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px;";
   // x.style = "border: 0px";
