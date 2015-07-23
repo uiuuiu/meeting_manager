@@ -42,15 +42,15 @@
       position:relative;
     }
     .col-md-2 {
-      position:fixed;
+      position:absolute;
     }
   </style>
   <script type="text/javascript">
+  var origTop = $(".col-md-2").css("top");
     $(window).scroll(function(){ 
-     var offset=1;
+     var offset=200;
      //stop is called so easing doesn't affect while it is still scrolling.
-     $(".col-md-2").stop().animate({top:($(window).scrollTop()+offset)+"px"}, 300, 'swing');
-
+     $(".col-md-2").stop().animate({top:($(window).scrollTop())+"px"}, 300, 'swing').delay(10);
   });
   </script>
 </head>
@@ -112,7 +112,7 @@
 <!--toan bo !-->
 <div class="container" style="width:100%;height:100%;padding-left: 10px;" id="toanbo" >
 <!--khung ben phai !-->
-    <div class="col-md-2" style="width: 200px;border: 5px solid lightblue;
+    <div class="col-md-2" style="box-shadow: 0px 0px 2px 2px grey;width: 200px;border: 5px solid lightblue;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -201,7 +201,7 @@
     </div>
     <%end%>
     <!-- khung ben trai -->
-    <div class="col-md-10"  style="margin-left: 220px;min-height: 600px height:100%;background-color: white;border: 5px solid lightblue;
+    <div class="col-md-10"  style="box-shadow: 0px 0px 2px 2px grey;margin-left: 220px;min-height: 600px height:100%;background-color: white;border: 5px solid lightblue;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -ms-border-radius: 10px;
