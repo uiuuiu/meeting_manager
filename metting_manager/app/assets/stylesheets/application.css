@@ -43,10 +43,11 @@ display: none;
 }
 .member{
 	width: 100%;
-	height: 80px;
+	height: 100%;
+	margin: auto;
 }
 .sub_member {
-	width: 180px;
+	width: 17%;
 	height: 180px;
 	float: left;
 	margin: 25px;
