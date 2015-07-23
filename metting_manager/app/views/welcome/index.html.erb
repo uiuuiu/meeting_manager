@@ -22,33 +22,11 @@ table td.highlighted {
 <body>
 <!-- lich -->
 <div class="container">
-<%= form_for(@a="", :html => {:class => "form-horizontal center", :multipart => true}, url: root_path, method: :get) do |f| %>
-    <div class="col-sm-6" style="height:130px;">
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker10'>
-                <%= f.text_field :get_time,:class => "form-control" %>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar">
-                    </span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker10').datetimepicker({
-                viewMode: 'years',
-                format: 'YYYY/MM'
-            });
-        });
-    </script>
-    <%= f.submit "find", class: "btn btn-primary" %> 
-  <% end %>
 </div>
 <!-- end lich -->
   <% @daytime = Array.new %>
   <% @tam = "" %>
-<table id='our_table' class="mytb" style="">
+<table id='our_table' class="mytb" style="color: GreenYellow;">
   <thead>
        <tr>
            <th></th>
@@ -56,7 +34,7 @@ table td.highlighted {
           <% @end_of_month = Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, -1) %>
 
           <% (@beginning_of_month..@end_of_month).each do |d| %>
-          <% if d.day <15 %>
+          <% if d.day <17 %>
           <th style="witdh: 10px"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
           <% else %>
           <th style="witdh: 10px; display: none"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
@@ -80,7 +58,7 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>"></td>
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted"></td>
                         <% end %>
                     <% end %>
                     <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
@@ -91,7 +69,7 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none"></td>
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none" class="highlighted"></td>
                         <% end %>
                     <% end %>
                     <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
