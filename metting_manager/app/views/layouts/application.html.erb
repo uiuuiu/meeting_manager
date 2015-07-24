@@ -48,9 +48,8 @@
   <script type="text/javascript">
   var origTop = $(".col-md-2").css("top");
     $(window).scroll(function(){ 
-     var offset=200;
      //stop is called so easing doesn't affect while it is still scrolling.
-     $(".col-md-2").stop().animate({top:($(window).scrollTop())+"px"}, 300, 'swing').delay(10);
+     $(".col-md-2").stop().animate({top:($(window).scrollTop())+"px"}, 100, 'swing').delay(10);
   });
   </script>
 </head>
