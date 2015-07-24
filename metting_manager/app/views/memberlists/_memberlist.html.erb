@@ -1,22 +1,6 @@
-<style type="text/css">
-  .test + .tooltip > .tooltip-inner {
-      background-color: #8AC007; 
-      color: #FFFFFF; 
-      border: 1px solid green; 
-      padding: 15px;
-      font-size: 15px;
-      text-align: left;
-      text-indent: left;
-  }
-  /* Tooltip on top */
-  .test + .tooltip.top > .tooltip-arrow {
-      border-top: 5px solid red;
-
-  }
-</style>
 <% @profile=Profile.find_by_user_id(memberlist.user_id)%>
 <% value  = "team =>" + @group.name  + "\n" + "name => " + @profile.name + "\n" + "level=> " + @profile.level%>
-    <div class="sub_member test" onmouseover="bigDiv(this)" onmouseout ="normalDiv(this)" style="border: 10px; border-color: red" data-toggle="tooltip" data-placement="top" title = "<%= value%>" >
+    <div class="review_<%=h memberlist.user_id %> sub_member test" onmouseover="bigDiv(this)" onmouseout ="normalDiv(this)" style="border: 10px; border-color: red" data-toggle="tooltip" data-placement="top" title = "<%= value%>" >
 
     <%= link_to user_profile_path(memberlist.user_id, @profile) do %>
             <%= image_tag(@profile.picture_url,:class => 'myimg',:width => "100%",:height => "90%",:style => "border: 5px solid lightblue;
