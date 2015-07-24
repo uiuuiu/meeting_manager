@@ -39,20 +39,45 @@ background:#fff;
 display: none;
 }
 .code{
-	padding-top: 5%;
+  padding-top: 5%;
 }
 .member{
-	width: 100%;
-	height: 100%;
-	margin: auto;
+  width: 100%;
+  height: 100%;
+  margin: auto;
 }
 .sub_member {
-	width: 17%;
-	height: 180px;
-	float: left;
-	margin: 25px;
-	text-align: center;
-	align: center;
-	border: 5px solid;
+  width: 17%;
+  height: 180px;
+  float: left;
+  margin: 25px;
+  text-align: center;
+  align: center;
+  border: 5px solid;
 }
-/**/
+/*trong _member*/
+.test + .tooltip > .tooltip-inner {
+      background-color: #8AC007; 
+      color: #FFFFFF; 
+      border: 1px solid green; 
+      padding: 15px;
+      font-size: 15px;
+      text-align: left;
+      text-indent: left;
+  }
+  /* Tooltip on top */
+.test + .tooltip.top > .tooltip-arrow {
+      border-top: 5px solid red;
+
+  }
+  /*end trong _member*/
+  /*trong show*/
+.bs-example{
+      margin-top: -28px;
+      margin-left: 730px;
+      font: red;
+    }
+.bs-example li a{
+      color: red;
+    }
+/*end trong show*/
