@@ -44,7 +44,7 @@
 <div style="width: 100%;display: inline-block;margin: auto" >
 <% @users.each do |u| %>
 <% @user = User.find_by_id(u.id) %>
-<%= render :partial => @user %>
+<%= render :partial => @user if @user != current_user%>
 <% end %>
 </div>
 <% end %>
