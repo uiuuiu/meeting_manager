@@ -44,6 +44,9 @@
     .col-md-2 {
       position:absolute;
     }
+    .navbar {
+      
+    }
   </style>
   <script type="text/javascript">
   var origTop = $(".col-md-2").css("top");
@@ -54,20 +57,33 @@
   </script>
 </head>
 <body class="mybody">
-<nav class="navbar navbar-inverse navbar-fixed-top" style=" height: 60px;border: 5px solid lightblue;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    border-radius: 10px;">
-      <div class="container" style="height:100%">
-        <div class="navbar-header" style="width: 300px">
-          <%= link_to "HOME", root_path, class: "navbar-brand", :style => "color: white;height:100%" %>
-        </div>
-        <div class="nav navbar-nav navbar-center" style="align:center; height: 100%">
-                    <%= form_for(@a="", :html => {:class => "form-horizontal center", :multipart => true}, url: root_path, method: :get) do |f| %>
-                <div class="col-sm-6" style="height:50px; width:500px">
-                    <div class="form-group">
+<div id="wrapper">
+<div class="nav-wrapper">
+<div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<%= link_to "Home", root_path, class: "navbar-brand" %>
+</div>
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<ul class="nav navbar-nav">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <span class="caret"></span></a>
+<ul class="dropdown-menu" role="menu">
+<li class="divider"></li>
+<li><a href="#">ABC XYZ</a></li>
+<li class="divider"></li>
+<li><%= form_for(@a="", :html => { :multipart => true}, url: root_path, method: :get) do |f| %>
+                <div style="height:60px; width: 100%;">
+                    <div class="form-group" style="width:60%; float: left;margin: 25px;text-align: center;align: center;">
                         <div class='input-group date' id='datetimepicker10' style="color: red;">
                             <%= f.text_field :get_time,:class => "form-control" %>
                             <span class="input-group-addon">
@@ -76,6 +92,7 @@
                             </span>
                         </div>
                     </div>
+                    <%= f.submit "find", :class => "btn btn-primary", :style => "margin: 25px;text-align: center;align: center;" %> 
                 </div>
                 <script type="text/javascript">
                     $(function () {
@@ -85,28 +102,37 @@
                         });
                     });
                 </script>
-                <%= f.submit "find", class: "btn btn-primary" %> 
-              <% end %>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" style="color:blue; height:100%">Logged in as <strong><%= current_user.email %></strong>.
-          <span class="caret"></span></button>
-          <ul class="navbar-text pull-right dropdown-menu">
-                <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li> 
-                <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
-                </ul>
-              <% else %>
-              <ul class="navbar-text pull-right" >
-                <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
-                <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-            <% end %>
-          </ul>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+              <% end %></li>
+</ul>
+</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<div class="header" style="text-align: center">
+  <p class="navbar-text pull-right">
+<% if user_signed_in? %>
+<li class="dropdown">
+  Logged in as <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong><%= current_user.email %></strong>. <span class="caret"></span></a>
+  <ul class="dropdown-menu" role="menu">
+  <li><%= link_to 'New Profile', new_user_profile_path(current_user), :class => 'navbar-link' %></li>
+  <li><%= link_to 'Show profiles', user_profiles_path(current_user), :class => 'navbar-link' %></li>
+  <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+  </ul>
+  </li>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>
+</p>
+</div>
+</ul>
+</li>
+</ul>
+</div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
 </nav>
+</div>
+<!-- /.container -->
+</div>
 <div class="code">
 <!--toan bo !-->
 <div class="container" style="width:100%;height:100%;padding-left: 10px;" id="toanbo" >
@@ -200,7 +226,7 @@
     </div>
     <%end%>
     <!-- khung ben trai -->
-    <div class="col-md-10"  style="box-shadow: 0px 0px 2px 2px grey;margin-left: 220px;min-height: 600px height:100%;background-color: white;border: 5px solid lightblue;
+    <div class="col-md-10"  style="width: 80%; box-shadow: 0px 0px 2px 2px grey;margin-left: 220px;min-height: 600px height:100%;background-color: white;border: 5px solid lightblue;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -ms-border-radius: 10px;
