@@ -17,18 +17,21 @@
 <% @profile=Profile.find_by_user_id(memberlist.user_id)%>
 <% value  = "team =>" + @group.name  + "\n" + "name => " + @profile.name + "\n" + "level=> " + @profile.level%>
     <div class="sub_member test" onmouseover="bigDiv(this)" onmouseout ="normalDiv(this)" style="border: 10px; border-color: red" data-toggle="tooltip" data-placement="top" title = "<%= value%>" >
+
     <%= link_to user_profile_path(memberlist.user_id, @profile) do %>
             <%= image_tag(@profile.picture_url,:class => 'myimg',:width => "100%",:height => "90%",:style => "border: 5px solid lightblue;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    border-radius: 10px;
-    border-color: DeepSkyBlue")%>
+                        -moz-border-radius: 10px;
+                        -webkit-border-radius: 10px;
+                        -ms-border-radius: 10px;
+                        -o-border-radius: 10px;
+                        border-radius: 10px;
+                        border-color: DeepSkyBlue"
+    )%>
     <% end %>
 
     <%= link_to "#{@profile.name}",user_group_memberlist_profile_path(@group.user_id,@group,memberlist,@profile)%>
     <td><%= link_to 'Destroy', user_group_memberlist_path(current_user,@group,memberlist), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    
   </div>  
 <!--  -->
 <script>
