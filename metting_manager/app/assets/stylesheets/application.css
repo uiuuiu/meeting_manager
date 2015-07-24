@@ -81,3 +81,18 @@ display: none;
       color: red;
     }
 /*end trong show*/
+
+/*group_header*/
+.group_header{
+  margin-left: -1.5%;
+  margin-top: 0%;
+  width: 103.5%;
+  background-color: lightblue;
+}
+.group_header p{
+  font-family: "Times New Roman", Times, serif;
+  font-style: normal;
+  font-size: 30px;
+  color: green;
+  text-align: left;
+}
