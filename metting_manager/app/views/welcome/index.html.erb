@@ -1,14 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title></title>
   <style type="text/css" media="screen">
     table td {
-  width:100px;
-  height:100px;
+  height:50px;
   text-align:center;
   vertical-align:middle;
   background-color:#ccc;
@@ -18,15 +10,9 @@ table td.highlighted {
   background-color:#999;
 }
   </style>
-</head>
-<body>
-<!-- lich -->
-<div class="container">
-</div>
-<!-- end lich -->
   <% @daytime = Array.new %>
   <% @tam = "" %>
-<table id='our_table' class="mytb" style="color: GreenYellow;">
+<table id='our_table' class="mytb" style="color: GreenYellow; width: 100%; table-layout: fixed;">
   <thead>
        <tr>
            <th></th>
@@ -35,9 +21,9 @@ table td.highlighted {
 
           <% (@beginning_of_month..@end_of_month).each do |d| %>
           <% if d.day <17 %>
-          <th style="witdh: 10px"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
+          <th style="witdh: 5%"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
           <% else %>
-          <th style="witdh: 10px; display: none"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
+          <th style="witdh: 5%; display: none"><%= "#{d.month} #{d.year}" %><br><%= " #{d.day}" %></th>
           <% end %>
            <% end %>
         </tr>
@@ -182,5 +168,3 @@ table td.highlighted {
   <% end %>
   <%=  link_to "send daytime", new_welcome_path(:type => @daytime) %>
   <%=  link_to "Groups", groups_path %>
-</body>
-</html>

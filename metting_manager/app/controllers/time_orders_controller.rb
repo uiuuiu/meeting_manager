@@ -27,6 +27,7 @@ class TimeOrdersController < ApplicationController
 			}
 			objlist.push(obj)
 		end
+		if objlist != nil
 		objlist = objlist.sort_by{|f| f[:ids]%100}
 		c = objlist.first[:ids]%100
 		c1 = objlist.last[:objtime]
@@ -57,6 +58,7 @@ class TimeOrdersController < ApplicationController
 			if (Listid.find_by(:idcell => f[:ids]) == nil) || (Listid.find_by(:idcell => f[:ids]) != nil && Listid.find_by(:time_signed => f[:objtime]) == nil)
 				Listid.create(:idcell => f[:ids], :time_signed => f[:objtime])
 			end
+		end
 		end
 		@orders = TimeOrder.all
 		# binding.pry
