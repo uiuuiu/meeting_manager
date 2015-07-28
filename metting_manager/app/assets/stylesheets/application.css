@@ -71,6 +71,23 @@ display: none;
 
   }
   /*end trong _member*/
+
+  /*trong _user*/
+.user_seach + .tooltip > .tooltip-inner {
+      background-color: #FFFFFF; 
+      color: #8AC007; 
+      border: 1px solid green; 
+      padding: 15px;
+      font-size: 15px;
+      text-align: left;
+      text-indent: left;
+  }
+  /* Tooltip on top */
+.user_seach + .tooltip.top > .tooltip-arrow {
+      border-top: 5px solid red;
+
+  }
+  /*end trong _user*/
   /*trong show*/
 .bs-example{
       margin-top: -28px;
@@ -95,4 +112,13 @@ display: none;
   font-size: 30px;
   color: green;
   text-align: left;
+}
+.user_seach{
+  width: 8%;
+  height: 90px;
+  float: left;
+  margin: 25px;
+  text-align: center;
+  align: center;
+  border-radius: 50%;
 }
