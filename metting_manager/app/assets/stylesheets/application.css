@@ -114,6 +114,7 @@ display: none;
   font-size: 30px;
   color: green;
   text-align: left;
+  box-shadow: 0 10px 10px -10px black;
 }
 .user_seach{
   width:90px;

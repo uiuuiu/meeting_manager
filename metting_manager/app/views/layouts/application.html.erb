@@ -21,10 +21,10 @@
       background-image: url("/assets/clock.jpg");
     }
     .navbar {
-      background: -webkit-linear-gradient(white, green); /* For Safari 5.1 to 6.0 */
-      background: -o-linear-gradient(white, green); /* For Opera 11.1 to 12.0 */
-      background: -moz-linear-gradient(white, green); /* For Firefox 3.6 to 15 */
-      background: linear-gradient(white, green); /* Standard syntax */
+      background: -webkit-linear-gradient(white, grey); /* For Safari 5.1 to 6.0 */
+      background: -o-linear-gradient(white, grey); /* For Opera 11.1 to 12.0 */
+      background: -moz-linear-gradient(white, grey); /* For Firefox 3.6 to 15 */
+      background: linear-gradient(white, grey); /* Standard syntax */
       
     }
     .col-md-10{
@@ -33,10 +33,10 @@
     .mybody{
       /*background-size:cover;
       background-image: url("/assets/prison.jpg"); background-repeat: no-repeat;*/
-      background: -webkit-linear-gradient(white, lightblue); /* For Safari 5.1 to 6.0 */
-      background: -o-linear-gradient(white, lightblue); /* For Opera 11.1 to 12.0 */
-      background: -moz-linear-gradient(white, lightblue); /* For Firefox 3.6 to 15 */
-      background: linear-gradient(white, lightblue); /* Standard syntax */
+      background: -webkit-linear-gradient(grey, lightblue); /* For Safari 5.1 to 6.0 */
+      background: -o-linear-gradient(grey, lightblue); /* For Opera 11.1 to 12.0 */
+      background: -moz-linear-gradient(grey, lightblue); /* For Firefox 3.6 to 15 */
+      background: linear-gradient(grey, lightblue); /* Standard syntax */
     }
     #toanbo{
       position:relative;
@@ -47,12 +47,19 @@
     .navbar {
       
     }
+    .code{
+      position: relative;
+    }
+    .code div{
+      position: absolute;
+    }
   </style>
   <script type="text/javascript">
   var origTop = $(".col-md-2").css("top");
     $(window).scroll(function(){ 
      //stop is called so easing doesn't affect while it is still scrolling.
      $(".col-md-2").stop().animate({top:($(window).scrollTop())+"px"}, 100, 'swing').delay(10);
+     $(".logo").stop().animate({top: -($(window).scrollTop())+"px"}, 100, 'swing');
   });
   </script>
 </head>
@@ -132,17 +139,35 @@
 </div>
 <!-- /.container -->
 </div>
-<div class="code">
+<div class="code" style="text-align: center; padding-top: 3%; padding-bottom: 3%; display: inline-block;margin: auto;padding-left: 30%; width: 50%";>
+    <div class="logo" style="margin-top: -10%; margin-left: 5% "><img src="/assets/asian img/logo.png"  style=" width:100px;height:100px;"></div>
+
+    <div class="text5" style="margin-left: 15%;"><img src="/assets/asian img/text5.png" style=" width:50px;height:50px"></div>
+
+    <div class="s" style="align:center;margin-left: 25%"><img src="/assets/asian img/s.png" style=" width:50px;height:50px;"></div>
+
+    <div class="i" style="align:center;margin-left: 35%"><img src="/assets/asian img/i.png" style=" width:20px;height:50px;"></div>
+
+    <div class="a" style="align:center;margin-left: 45%"><img src="/assets/asian img/a.png" style=" width:50px;height:50px;"></div>
+
+    <div class="n" style="align:center;margin-left: 55%"><img src="/assets/asian img/n.png" style=" width:50px;height:50px;"></div>
+
+    <div class="t" style="align:center;margin-left: 65%"><img src="/assets/asian img/t.png" style=" width:50px;height:50px;"></div>
+
+    <div class="e" style="align:center;margin-left: 75%"><img src="/assets/asian img/e.png" style=" width:50px;height:50px;"></div>
+
+    <div class="c" style="align:center;margin-left: 85%"><img src="/assets/asian img/c.png" style=" width:50px;height:50px;"></div>
+
+    <div class="h" style="align:center;margin-left: 95%"><img src="/assets/asian img/h.png" style=" width:50px;height:50px;"></div>
 </div>
 <!--toan bo !-->
 <div class="container" style="width:100%;height:100%;padding-left: 10px;" id="toanbo" >
 <!--khung ben phai !-->
-    <div class="col-md-2" style="box-shadow: 0px 0px 2px 2px grey;width: 200px;border: 5px solid lightblue;
+    <div class="col-md-2" style="box-shadow: 0px 0px 4px 4px grey;width: 200px;border: 5px solid silver;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    border-radius: 10px;">
+    -o-border-radius: 10px;">
       <% if current_user!=nil %>
       <!-- avatar -->
         <div class="picture" >
@@ -226,12 +251,11 @@
     </div>
     <%end%>
     <!-- khung ben trai -->
-    <div class="col-md-10"  style="min-width: 1000px;width: 80%; box-shadow: 0px 0px 2px 2px grey;margin-left: 220px;min-height: 600px; height:100%;background-color: white;border: 5px solid lightblue;
+    <div class="col-md-10"  style="min-width: 1000px;width: 80%; box-shadow: 0px 0px 4px 4px grey;margin-left: 220px;min-height: 600px; height:100%;background-color: white;border: 5px solid lightblue;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    border-radius: 10px;">
+    -o-border-radius: 10px;">
       <%= yield %>
     </div>
      
