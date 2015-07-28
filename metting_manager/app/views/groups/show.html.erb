@@ -38,10 +38,13 @@
 
     <!-- render sau khi tim thay -->
     <% if @users!= nil%>
-    <div style="width: 100%;display: inline-block;margin: auto" >
+    <div style="width: 100%;display: inline-block;" >
+      <div style="margin-left: -1.5%;float: left;">
+        <%= link_to 'all', user_group_memberlists_add_path(@group.user_id, @group, @user, :list => @users),:class => "btn btn-sm",:style => "background-color: lightblue"  %>
+      </div>
       <% @users.each do |u| %>
       <% @user = User.find_by_id(u.id) %>
-      <%= render :partial => @user if @user != current_user%>
+      <%= render :partial => @user %>
       <% end %>
     </div>
     <% end %>
