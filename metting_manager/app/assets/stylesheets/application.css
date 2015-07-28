@@ -74,13 +74,15 @@ display: none;
 
   /*trong _user*/
 .user_seach + .tooltip > .tooltip-inner {
-      background-color: #FFFFFF; 
-      color: #8AC007; 
+      background-color: #333; 
+      color: green; 
       border: 1px solid green; 
       padding: 15px;
       font-size: 15px;
       text-align: left;
       text-indent: left;
+      border-radius:6px; /*Rounded corners. N/A for IE 8 and below.*/
+    box-shadow: 0 1px 4px #AAAAAA;
   }
   /* Tooltip on top */
 .user_seach + .tooltip.top > .tooltip-arrow {
