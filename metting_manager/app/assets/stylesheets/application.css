@@ -71,6 +71,25 @@ display: none;
 
   }
   /*end trong _member*/
+
+  /*trong _user*/
+.user_seach + .tooltip > .tooltip-inner {
+      background-color: #FFFFFF; 
+      color: #8AC007; 
+      border: 1px solid green; 
+      padding: 15px;
+      font-size: 15px;
+      text-align: left;
+      text-indent: left;
+      border-radius:6px; /*Rounded corners. N/A for IE 8 and below.*/
+    box-shadow: 0 1px 4px #AAAAAA;
+  }
+  /* Tooltip on top */
+.user_seach + .tooltip.top > .tooltip-arrow {
+      border-top: 5px solid red;
+
+  }
+  /*end trong _user*/
   /*trong show*/
 .bs-example{
       margin-top: -28px;
@@ -95,6 +114,13 @@ display: none;
   font-size: 30px;
   color: green;
   text-align: left;
-  border-bottom: 10px;
-  box-shadow: 0px 10px 10px -10px black;
+}
+.user_seach{
+  width:90px;
+  height: 90px;
+  float: left;
+  margin: 25px;
+  text-align: center;
+  align: center;
+  border-radius: 50%;
 }
