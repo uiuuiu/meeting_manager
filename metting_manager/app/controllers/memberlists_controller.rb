@@ -16,7 +16,6 @@ class MemberlistsController < ApplicationController
           @list.delete("#{@member.id}")
         end
       }
-      
     else
       @member = User.find_by_id(params[:format])
       if Memberlist.find_or_create_by(:group_id => @this_group.id,:user_id => @member.id)
