@@ -19,7 +19,7 @@
      <%= submit_tag "let go",:class => "btn btn-info btn-sm"%>
      <!-- drop menu setting -->
      <ul class="dropdown bs-example">
-      <img  src=" /uploads/setting.jpeg " data-toggle="dropdown" class="dropdown-toggle" width="15px" height="15px">
+      <img  src=" /assets/setting.jpeg " data-toggle="dropdown" class="dropdown-toggle" width="15px" height="15px">
       <ul class="dropdown-menu">
         <li><%= link_to "add", new_user_group_memberlist_path(current_user,@group)%></li>
         <li><%= link_to 'Edit', edit_group_path(@group) %></li>
@@ -39,9 +39,22 @@
     <!-- render sau khi tim thay -->
     <% if @users!= nil%>
     <div style="width: 100%;display: inline-block;" >
-      <div style="margin-left: -1.5%;float: left;">
-        <%= link_to 'all', user_group_memberlists_add_path(@group.user_id, @group, @users, :list => @users),:class => "btn btn-sm",:style => "background-color: lightblue" if @users.size > 1 %>
+      <!-- neu tim ra dc 2 mem tro len thi hien thi nut add all -->
+      <%if @users.size > 1%>
+      <div class="user_seach" style="">
+        <%= link_to user_group_memberlists_add_path(@group.user_id, @group, @users, :list => @users),:style => "background-color: lightblue;" do %>
+        <img  src="/assets/add-more-green-icone-8951-128.png" width="100%" height="100%" style="border: 3px solid red;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        border-radius: 50%;
+        ">
+        <%end%>
+        add all
       </div>
+      <%end%>
+      <!-- end add all button -->
       <% @users.each do |u| %>
       <% @user = User.find_by_id(u.id) %>
       <%= render :partial => @user %>
