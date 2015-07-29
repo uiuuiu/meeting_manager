@@ -48,6 +48,7 @@ display: none;
 }
 .sub_member {
   width: 17%;
+  min-width: 180px;
   height: 180px;
   float: left;
   margin: 25px;
