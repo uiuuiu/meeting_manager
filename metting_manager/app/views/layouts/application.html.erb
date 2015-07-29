@@ -55,11 +55,20 @@
     }
   </style>
   <script type="text/javascript">
-  var origTop = $(".col-md-2").css("top");
+  var origTop = $(".logo").css("left");
     $(window).scroll(function(){ 
      //stop is called so easing doesn't affect while it is still scrolling.
      $(".col-md-2").stop().animate({top:($(window).scrollTop())+"px"}, 100, 'swing').delay(10);
-     $(".logo").stop().animate({top: -($(window).scrollTop())+"px"}, 100, 'swing');
+     $(".logo").stop().animate({left: -($(window).scrollTop() - 255)+"px"}, 100, 'swing');
+     $(".text5").stop().animate({left: -($(window).scrollTop() - 310)+"px"}, 100, 'swing').delay(10);
+     $(".s").stop().animate({left: -($(window).scrollTop() - 365)+"px"}, 100, 'swing').delay(11);
+     $(".i").stop().animate({left: -($(window).scrollTop() - 420)+"px"}, 100, 'swing').delay(12);
+     $(".a").stop().animate({left: -($(window).scrollTop() - 445)+"px"}, 100, 'swing').delay(13);
+     $(".n").stop().animate({left: -($(window).scrollTop() - 500)+"px"}, 100, 'swing').delay(14);
+     $(".t").stop().animate({left: -($(window).scrollTop() - 555)+"px"}, 100, 'swing').delay(15);
+     $(".e").stop().animate({left: -($(window).scrollTop() - 610)+"px"}, 100, 'swing').delay(16);
+     $(".c").stop().animate({left: -($(window).scrollTop() - 665)+"px"}, 100, 'swing').delay(17);
+     $(".h").stop().animate({left: -($(window).scrollTop() - 720)+"px"}, 100, 'swing').delay(18);
   });
   </script>
 </head>
@@ -139,26 +148,26 @@
 </div>
 <!-- /.container -->
 </div>
-<div class="code" style="text-align: center; padding-top: 3%; padding-bottom: 3%; display: inline-block;margin: auto;padding-left: 30%; width: 50%";>
-    <div class="logo" style="margin-top: -10%; margin-left: 5% "><img src="/assets/asian img/logo.png"  style=" width:100px;height:100px;"></div>
+<div class="code" style="text-align: center; padding-top: 3%; padding-bottom: 3%; display: inline-block;margin: auto; width: 100%; height: 130px; left: 1%";>
+    <div class="logo" style="margin-top: -50px; left: 200px; width: 100px "><img src="/assets/asian img/logo.png"  style=" width:100px;height:130px;"></div>
 
-    <div class="text5" style="margin-left: 15%;"><img src="/assets/asian img/text5.png" style=" width:50px;height:50px"></div>
+    <div class="text5" style="margin-top: 30px;left: 265px;"><img src="/assets/asian img/text5.png" style=" width:50px;height:50px"></div>
 
-    <div class="s" style="align:center;margin-left: 25%"><img src="/assets/asian img/s.png" style=" width:50px;height:50px;"></div>
+    <div class="s" style="margin-top: 30px;left: 320px;"><img src="/assets/asian img/s.png" style=" width:50px;height:50px;"></div>
 
-    <div class="i" style="align:center;margin-left: 35%"><img src="/assets/asian img/i.png" style=" width:20px;height:50px;"></div>
+    <div class="i" style="margin-top: 30px;left: 375px"><img src="/assets/asian img/i.png" style=" width:20px;height:50px;"></div>
 
-    <div class="a" style="align:center;margin-left: 45%"><img src="/assets/asian img/a.png" style=" width:50px;height:50px;"></div>
+    <div class="a" style="margin-top: 30px;;left: 400px"><img src="/assets/asian img/a.png" style=" width:50px;height:50px;"></div>
 
-    <div class="n" style="align:center;margin-left: 55%"><img src="/assets/asian img/n.png" style=" width:50px;height:50px;"></div>
+    <div class="n" style="margin-top: 30px;;left: 455px"><img src="/assets/asian img/n.png" style=" width:50px;height:50px;"></div>
 
-    <div class="t" style="align:center;margin-left: 65%"><img src="/assets/asian img/t.png" style=" width:50px;height:50px;"></div>
+    <div class="t" style="margin-top: 30px;;left: 510px"><img src="/assets/asian img/t.png" style=" width:50px;height:50px;"></div>
 
-    <div class="e" style="align:center;margin-left: 75%"><img src="/assets/asian img/e.png" style=" width:50px;height:50px;"></div>
+    <div class="e" style="margin-top: 30px;;left: 565px"><img src="/assets/asian img/e.png" style=" width:50px;height:50px;"></div>
 
-    <div class="c" style="align:center;margin-left: 85%"><img src="/assets/asian img/c.png" style=" width:50px;height:50px;"></div>
+    <div class="c" style="margin-top: 30px;;left: 620px"><img src="/assets/asian img/c.png" style=" width:50px;height:50px;"></div>
 
-    <div class="h" style="align:center;margin-left: 95%"><img src="/assets/asian img/h.png" style=" width:50px;height:50px;"></div>
+    <div class="h" style="margin-top: 30px;;left: 675px"><img src="/assets/asian img/h.png" style=" width:50px;height:50px;"></div>
 </div>
 <!--toan bo !-->
 <div class="container" style="width:100%;height:100%;padding-left: 10px;" id="toanbo" >
