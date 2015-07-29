@@ -5,7 +5,9 @@ class UsersController < ApplicationController
 
   def search
     @users = Array.new 
-  	if params[:find_style]=="name"&&(@profiles = Profile.where(:name => params[:name]))!=nil
+  	if params[:find_style]=="name"&&(@profiles = Profile.where(["name LIKE ?", "%#{params[:name]}%"]))!=nil
+
+       #:name => params[:name]
        #lay param chuyen len
       @profiles.each do |f| #voi moi cac profiles ta day cac user id vao mang @user
         @users.push(User.find_by_id(f.user_id))
