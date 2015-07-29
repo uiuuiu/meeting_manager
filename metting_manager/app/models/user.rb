@@ -10,4 +10,20 @@ class User < ActiveRecord::Base
      User.create(email: user[:email],password: user[:password])
    end
    
+  def admin?
+    if self.id.nil?
+       false
+    else
+      self.role_id ==1   
+    end 
+  end
+
+  def user?
+    if self.id.nil?
+        false
+    else
+        self.role_id ==2
+    end 
+  end
+
 end
