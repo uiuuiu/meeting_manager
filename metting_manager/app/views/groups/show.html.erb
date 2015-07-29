@@ -40,7 +40,7 @@
     <% if @users!= nil%>
     <div style="width: 100%;display: inline-block;" >
       <div style="margin-left: -1.5%;float: left;">
-        <%= link_to 'all', user_group_memberlists_add_path(@group.user_id, @group, @user, :list => @users),:class => "btn btn-sm",:style => "background-color: lightblue" if @user.size > 1 %>
+        <%= link_to 'all', user_group_memberlists_add_path(@group.user_id, @group, @users, :list => @users),:class => "btn btn-sm",:style => "background-color: lightblue" if @users.size > 1 %>
       </div>
       <% @users.each do |u| %>
       <% @user = User.find_by_id(u.id) %>
