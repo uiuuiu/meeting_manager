@@ -145,7 +145,7 @@ table td.highlighted {
         });
     });
 });
-  </script>
+</script>
 <script type="text/javascript">
   function split($table, chunkSize) {
   var cols = $("th", $table).length - 2;
@@ -161,10 +161,66 @@ table td.highlighted {
      }
   }  
 }
+  function next(){
+    var dem = 0;
+    var table = document.getElementById("our_table");
+    $("#our_table thead tr th").each(function(){
+      dem = dem +1;
+      if(dem >=17)
+      {
+        this.style = 'witdh:5%; display:visible;';
+      }
+      else
+      {
+        this.style = 'display:none';
+      }
+    });
+    dem = 0;
+    $("#our_table td").each(function(){
+        dem = dem+1;
+        if((parseInt(this.id) % 100)>=17)
+        {
+          this.style = 'witdh: 10px; display: visible;';
+        }
+        else
+        {
+          this.style = 'witdh: 10px; display: none;';
+        }
+      });
+    }
+    function back(){
+      var dem = 0;
+      var table = document.getElementById("our_table");
+      $("#our_table thead tr th").each(function(){
+        dem = dem +1;
+        if(dem <18)
+        {
+          this.style = 'witdh:5%; display:visible;';
+        }
+        else
+        {
+          this.style = 'display:none';
+        }
+      });
+      dem = 0;
+      $("#our_table td").each(function(){
+          dem = dem+1;
+          if((parseInt(this.id) % 100)<17)
+          {
+            this.style = 'witdh: 10px; display: visible;';
+          }
+          else
+          {
+            this.style = 'witdh: 10px; display: none;';
+          }
+        });
+    }
 </script>
   <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true}, url: new_time_order_path, method: :get) do |f| %>
     <%= f.hidden_field :time_signed, :id => "daytime" %>
     <%= f.submit "Create", class: "btn btn-primary" %>  
   <% end %>
+  <button onclick="next()">Next</button>
+  <button onclick="back()">Back</button>
   <%=  link_to "send daytime", new_welcome_path(:type => @daytime) %>
   <%=  link_to "Groups", groups_path %>
