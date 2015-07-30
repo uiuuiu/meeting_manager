@@ -15,7 +15,7 @@ table td.highlighted {
 <table id='our_table' class="mytb" style="color: GreenYellow; width: 100%; table-layout: fixed;">
   <thead>
        <tr>
-           <th></th>
+           <th><!-- color --></th>
           <% @beginning_of_month = Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, 1) %>
           <% @end_of_month = Date.civil(@get_time.strftime("%Y").to_i, @get_time.strftime("%m").to_i, -1) %>
 
@@ -44,7 +44,15 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted"><%= f.desc %></td>
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted">
+                          <% @profile = Profile.find_by_user_id(f.user_id) %>
+                          <% @user= User.find_by_id(@profile.user_id) %>
+                          <% @users = User.new  %>
+                          <% @group = Group.find_by_id(1) %>
+                          <div class="user_seach_welcome">
+                          <%= render 'form_user' %>
+                          </div>
+                          </td>
                         <% end %>
                     <% end %>
                     <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>

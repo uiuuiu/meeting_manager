@@ -1,0 +1,39 @@
+<!--voi moi users ta hien name va cac group ma chung tham gia cua chung -->
+<% @team = ""%>
+<% @mem = Memberlist.where(:user_id => @user.id) %>
+<%  if @mem.size > 1
+  @mem.each{|u| 
+    @team = @team + "<br>==>"+ Group.find_by_id(u.group_id).name
+  } %>
+  <%  elsif @mem.size==1
+  @team =  Group.find_by_id(@mem[0].group_id).name;
+end
+%>
+<% value ="1.Name => " + @user.profile.name + "<br>" + "2.Teams:  "+ @team +"tn phong, team hop, thoi gian,noi dung" %>
+<!-- value cho tootip -->
+<!-- end -->
+
+<div class="user_seach2" onmouseover="bigDiv_we(this)" onmouseout ="normalDiv_we(this)"  data-html="true" data-toggle="tooltip" data-placement="top" title = "<%= value%>" >
+  <%= link_to user_profile_path(@user.id, @user.profile) do %>
+  <%= image_tag(@user.profile.picture_url,:class => "myimg2",:width => "100%",:height => "100%",:style => "  border: 3px solid #686868;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 50%;
+    ")%>
+    <% end%>
+  </div>
+
+  <script>
+    function bigDiv_we(x) {
+      x.style = " border-radius: 50%;; -moz-border-radius: 10px; -webkit-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px;box-shadow: 0px 0px 3px 3px darkgrey ;width:55px; height: 65px;";
+    }
+    function normalDiv_we(x) {
+      x.style = "border: 0px;width:55px; height: 65px"; 
+      x.getElementsByClassName("myimg2")[0].style = "border: 3px solid #686868;border-radius: 50%; -moz-border-radius: 10px; -webkit-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px;";
+    }
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+    });
+  </script>
