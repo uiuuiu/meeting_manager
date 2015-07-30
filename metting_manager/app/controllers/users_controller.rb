@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+
   def index
-    
+
   end
 
   def search
     @users = Array.new 
-  	if params[:find_style]=="name"&&(@profiles = Profile.where(["name LIKE ?", "%#{params[:name]}%"]))!=nil
+    if params[:find_style]=="name"&&(@profiles = Profile.where(["name LIKE ?", "%#{params[:name]}%"]))!=nil
 
        #:name => params[:name]
        #lay param chuyen len
