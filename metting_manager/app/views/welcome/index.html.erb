@@ -44,7 +44,7 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted"></td>
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted"><%= f.desc %></td>
                         <% end %>
                     <% end %>
                     <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
@@ -55,7 +55,7 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none" class="highlighted"></td>
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none" class="highlighted"><%= f.desc %></td>
                         <% end %>
                     <% end %>
                     <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
@@ -216,11 +216,45 @@ table td.highlighted {
         });
     }
 </script>
-  <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true}, url: new_time_order_path, method: :get) do |f| %>
-    <%= f.hidden_field :time_signed, :id => "daytime" %>
-    <%= f.submit "Create", class: "btn btn-primary" %>  
-  <% end %>
+<script type="text/javascript">
+        var textbox1 = "";
+        var textbox2 = "";
+        var textbox3 = "";
+        var descr = "";
+        function saveTextBoxes() {
+            textbox1 = $("#textbox1").val();
+            textbox2 = $("#textbox2").val();
+            textbox3 = $("#textbox3").val();
+            $("#descr").val(textbox1 + textbox2 + textbox2) ;
+        }
+    </script> 
   <button onclick="next()">Next</button>
   <button onclick="back()">Back</button>
-  <%=  link_to "send daytime", new_welcome_path(:type => @daytime) %>
-  <%=  link_to "Groups", groups_path %>
+  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Create
+    </button><br>
+    <br><br>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Input Form</h4>
+                </div>
+                <div class="modal-body">
+                    Text Box 1 <input type="textbox" id="textbox1"> </input><br>
+                    Text Box 2 <input type="textbox" id="textbox2"> </input><br>
+                    Text Box 3 <input type="textbox" id="textbox3"> </input><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true, :onsubmit => 'saveTextBoxes();'}, url: new_time_order_path, method: :get) do |f| %>
+                      <%= f.hidden_field :time_signed, :id => "daytime" %>
+                      <%= f.hidden_field :user_id, :id => "descr" %>
+                    <%= f.submit "OK", class: "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>

@@ -51,7 +51,7 @@ class TimeOrdersController < ApplicationController
 			length = f.count
 			cellid = f.min_by{|a| a[:ids]}[:ids]
 			if (Listid.find_by(:idcell => cellid) == nil) || (Listid.find_by(:idcell => cellid) != nil && Listid.find_by(:time_signed => timestart) == nil)
-				tior = TimeOrder.create(:user_id => current_user.id, :time_start => timestart, :time_end => timeend, :length => length, :cellid => cellid)
+				tior = TimeOrder.create(:user_id => current_user.id, :time_start => timestart, :time_end => timeend, :length => length, :cellid => cellid, :desc => params[:time_order][:user_id])
 			end
 		end
 		objlist.each do |f|
