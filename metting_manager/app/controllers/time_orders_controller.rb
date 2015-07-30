@@ -33,6 +33,7 @@ class TimeOrdersController < ApplicationController
 		c1 = objlist.last[:objtime]
 		aa = Array.new
 		i = 0
+		objlist.uniq!
 		objlist.each{|f|
 					if f[:ids]%100 != c
 						timelist[i] = aa
