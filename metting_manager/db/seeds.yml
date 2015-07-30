@@ -110,42 +110,52 @@ user_list:
 - 
   email: chuong@gmail.com
   password: 12345678
+  role_id: 2
 
 - 
   email: phuc@gmail.com
   password: 12345678
+  role_id: 2
 
 - 
   email: luong@gmail.com
   password: 12345678
+  role_id: 1
 
 - 
   email: tien@gmail.com
   password: 12345678
+  role_id: 3
 
 - 
   email: son@gmail.com
   password: 12345678
+  role_id: 3
 
 - 
   email: chien@gmail.com
   password: 12345678
+  role_id: 3
 
 - 
   email: duydy@gmail.com
   password: 12345678
+  role_id: 3
 
 - 
   email: messi@gmail.com
   password: 12345678
+  role_id: 1
 
 - 
   email: ronaldo@gmail.com
   password: 12345678
+  role_id: 1
 
 - 
   email: congphuong@gmail.com
   password: 12345678
+  role_id: 1
 
 order_list:
 - 
