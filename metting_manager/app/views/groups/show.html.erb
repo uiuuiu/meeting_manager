@@ -55,6 +55,7 @@
       </div>
       <%end%>
       <!-- end add all button -->
+      
       <% @users.each do |u| %>
       <% @user = User.find_by_id(u.id) %>
       <%= render :partial => @user %>

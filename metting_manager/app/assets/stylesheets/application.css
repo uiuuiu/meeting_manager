@@ -91,6 +91,7 @@ display: none;
 
   }
   /*end trong _user*/
+
   /*trong show*/
 .bs-example{
       margin-top: -28px;
@@ -126,3 +127,27 @@ display: none;
   align: center;
   border-radius: 50%;
 }
+.user_seach2{
+  width:55px;
+  height: 65px;
+  text-align: center;
+  border-radius: 50%;
+}
+  /*trong _user*/
+.user_seach2 + .tooltip > .tooltip-inner {
+      background-color: #FFFFFF; 
+      color: #8AC007; 
+      border: 1px solid green; 
+      padding: 15px;
+      font-size: 15px;
+      text-align: left;
+      text-indent: left;
+      border-radius:6px; /*Rounded corners. N/A for IE 8 and below.*/
+    box-shadow: 0 1px 4px #AAAAAA;
+  }
+  /* Tooltip on top */
+.user_seach2 + .tooltip.top > .tooltip-arrow {
+      border-top: 5px solid red;
+
+  }
+  /*end trong _user*/
