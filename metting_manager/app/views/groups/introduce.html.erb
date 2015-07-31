@@ -1,0 +1,7 @@
+<div class="group_header">
+  <p> <%= @group.name.upcase %>  /   
+    <%= link_to "#{@group.memberlists.size} members",user_group_path(params[:user_id],@group) %>
+  </p>
+</div>
+<!-- reder seach -->
+<%= render 'seach' %>

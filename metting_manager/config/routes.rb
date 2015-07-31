@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     end
     resources :groups do  
       get 'memberlists/add'
-      post 'memberlists/add'       #1 user co nhieu group
+      post 'memberlists/add'
+      get 'introduce'       #1 user co nhieu group
       resources :profiles          #1 user co nhieu group
       resources :memberlists do  #1 group co nhieu memberlists
         resources :profiles do
@@ -35,7 +36,6 @@ Rails.application.routes.draw do
 
   resources :groups do
     get 'profile'
-
   end
   resources :profiles do
     get 'show'
