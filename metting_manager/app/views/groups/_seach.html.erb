@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+<div style="display: inline-block">
+  <%= form_tag users_search_path, method: :post %>
+  <!-- loai tim kiem -->
+  <%@find_style=["name","group"]%>
+  <%= select_tag(:find_style, options_for_select(
+    @find_style.collect{|u| 
+      [u] }
+      ))
+      %>
+      <!-- end loai tim kiem -->
+      <%= text_field_tag :name ,"",:style => "width:50%;"%>
+      <%= hidden_field_tag :group_id, @group.id %>
+      <%= submit_tag "let go", :class => "btn-submit btn btn-info btn-sm"%>
+      <!-- drop menu setting -->
+      <ul class="dropdown bs-example">
+        <img  src=" /assets/setting.jpeg " data-toggle="dropdown" class="dropdown-toggle" width="15px" height="15px">
+        <ul class="dropdown-menu">
+          <li><%= link_to "add", new_user_group_memberlist_path(current_user,@group)%></li>
+          <li><%= link_to 'Edit', edit_group_path(@group) %></li>
+          <li><%= link_to 'Back', attended_groups_path(current_user) %></li>
+        </ul>
+      </ul>
+      <!-- end drop menu setting -->
+
+      <!-- lay lai db tu user -->
+      <% @users = Array.new %>  <!-- khai bao 1 mang users moi de luu lai -->
+      <% if !params[:list].nil? %> <!-- neu prams khac nil thi ko thuc hien -->
+      <%   params[:list].each do |l| %><!-- voi moi phan tu list ta lam l-->
+      <% @users.push(User.find_by_id(l)) %><!--dua vao moi @user la 1 id user-->
+      <%   end %>
+      <% end %>
+
+      <!-- render sau khi tim thay -->
+      <% if @users!= nil%>
+      <div style="width: 100%;display: inline-block;" >
+        <!-- neu tim ra dc 2 mem tro len thi hien thi nut add all -->
+        <%if @users.size > 1%>
+        <div class="user_seach" style="">
+          <%= link_to user_group_memberlists_add_path(@group.user_id, @group,@users, :list => @users),:style => "background-color: lightblue;" do %>
+          <img  src="/assets/add-more-green-icone-8951-128.png" width="100%" height="100%" style="border: 3px solid red;
+          -moz-border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -ms-border-radius: 10px;
+          -o-border-radius: 10px;
+          border-radius: 50%;
+          ">
+          <%end%>
+          add all
+        </div>
+        <%end%>
+        <!-- end add all button -->
+        <% @users.each do |u| %>
+        <% @user = User.find_by_id(u.id) %>
+        <%= render :partial => @user %>
+        <% end %>
+      </div>
+      <% end %>
+</div>

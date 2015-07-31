@@ -74,6 +74,10 @@ class GroupsController < ApplicationController
     #binding.pry
   end
 
+  def introduce
+    @group = Group.find_by_id(params[:group_id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
