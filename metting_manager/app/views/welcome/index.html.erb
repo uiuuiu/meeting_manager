@@ -63,7 +63,15 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none" class="highlighted"><%= f.desc %></td>
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none" class="highlighted">
+                           <% @profile = Profile.find_by_user_id(f.user_id) %>
+                          <% @user= User.find_by_id(@profile.user_id) %>
+                          <% @users = User.new  %>
+                          <% @group = Group.find_by_id(1) %>
+                          <div class="user_seach_welcome">
+                          <%= render 'form_user' %>
+                          </div>
+                        </td>
                         <% end %>
                     <% end %>
                     <% if @idlist.map(&:idcell).include?(tam*100+ d.day) %>
@@ -94,24 +102,6 @@ table td.highlighted {
     .mousedown(function (e) {
       isMouseDown = true;
       $(this).toggleClass("highlighted");
-      
-      columnNumber = $(e.target).index() + 1;
-      headerText = $('th:nth-child(' + columnNumber + ')').text();
-      dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
-      if($(this).is(".highlighted")) 
-      {
-        list.push(dayytime);
-        $('#daytime').val(list);
-      }
-      else
-      {
-        for (var i=list.length-1; i>=0; i--) {
-        if (list[i] === dayytime) {
-            list.splice(i, 1);
-            $('#daytime').val(list);
-          }
-        }
-      }
       isHighlighted = $(this).hasClass("highlighted");
       return false; // prevent text selection
     })
@@ -119,23 +109,6 @@ table td.highlighted {
     .mouseover(function (e) {
       if (isMouseDown) {
         $(this).toggleClass("highlighted", isHighlighted);
-        columnNumber = $(e.target).index() + 1;
-        headerText = $('th:nth-child(' + columnNumber + ')').text();
-        dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
-        if($(this).is(".highlighted")) 
-        {
-          list.push(dayytime);
-          $('#daytime').val(list);
-        }
-        else
-        {
-          for (var i=list.length-1; i>=0; i--) {
-          if (list[i] === dayytime) {
-              list.splice(i, 1);
-              $('#daytime').val(list);
-            }
-          }
-        }
         }
     });
 
@@ -234,6 +207,17 @@ table td.highlighted {
             textbox2 = $("#textbox2").val();
             textbox3 = $("#textbox3").val();
             $("#descr").val(textbox1 + textbox2 + textbox2) ;
+            $("#our_table td").each(function(){
+              if($(this).hasClass( "highlighted" ) && $(this).is(':empty'))
+              {
+                columnNumber = $(this).index() + 1;
+                headerText = $('th:nth-child(' + columnNumber + ')').text();
+                dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
+                list.push(dayytime);               
+                }
+            });
+            $('#daytime').val(list);
+            list = [];
         }
     </script> 
   <button onclick="next()">Next</button>
@@ -243,6 +227,7 @@ table td.highlighted {
     </button><br>
     <br><br>
     <!-- Modal -->
+    <% @groups = Group.where(:user_id => current_user.id) %>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -250,18 +235,18 @@ table td.highlighted {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Input Form</h4>
                 </div>
+                <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true, :onsubmit => 'saveTextBoxes();'}, url: new_time_order_path, method: :get) do |f| %>
                 <div class="modal-body">
                     Text Box 1 <input type="textbox" id="textbox1"> </input><br>
                     Text Box 2 <input type="textbox" id="textbox2"> </input><br>
-                    Text Box 3 <input type="textbox" id="textbox3"> </input><br>
+                    <%= f.collection_select(:group_id, @groups, :id, :name ) %>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true, :onsubmit => 'saveTextBoxes();'}, url: new_time_order_path, method: :get) do |f| %>
                       <%= f.hidden_field :time_signed, :id => "daytime" %>
                       <%= f.hidden_field :user_id, :id => "descr" %>
                     <%= f.submit "OK", class: "btn btn-primary" %>
                     <% end %>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
