@@ -17,8 +17,6 @@ class GroupsController < ApplicationController
   def show 
       @group = Group.find_by_id(params[:id])
       @listmembers = @group.memberlists if @group.memberlists
-
-
   end
 
   # GET /groups/new

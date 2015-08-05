@@ -49,7 +49,6 @@
           <%end%>
           <%end%>
     <% elsif params[:listg]!=nil %>
-
        <%params[:listg].each do |k|%>
        <%  @groups.push(Group.find_by_id(k)) %>
        <%end%>
