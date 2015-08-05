@@ -22,38 +22,73 @@
         </ul>
       </ul>
       <!-- end drop menu setting -->
-
-      <!-- lay lai db tu user -->
-      <% @users = Array.new %>  <!-- khai bao 1 mang users moi de luu lai -->
-      <% if !params[:list].nil? %> <!-- neu prams khac nil thi ko thuc hien -->
-      <%   params[:list].each do |l| %><!-- voi moi phan tu list ta lam l-->
-      <% @users.push(User.find_by_id(l)) %><!--dua vao moi @user la 1 id user-->
-      <%   end %>
-      <% end %>
-
-      <!-- render sau khi tim thay -->
-      <% if @users!= nil%>
-      <div style="width: 100%;display: inline-block;" >
-        <!-- neu tim ra dc 2 mem tro len thi hien thi nut add all -->
-        <%if @users.size > 1%>
-        <div class="user_seach" style="">
-          <%= link_to user_group_memberlists_add_path(@group.user_id, @group,@users, :list => @users),:style => "background-color: lightblue;" do %>
-          <img  src="/assets/add-more-green-icone-8951-128.png" width="100%" height="100%" style="border: 3px solid red;
-          -moz-border-radius: 10px;
-          -webkit-border-radius: 10px;
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
-          border-radius: 50%;
-          ">
+    <!-- lay lai db tu user -->
+    <% @users = Array.new %>  <!-- khai bao 1 mang users moi de luu lai -->
+    <% @groups = Array.new%>
+    <% if !params[:listu].nil? %> <!-- neu prams khac nil thi ko thuc hien -->
+        <%  params[:listu].each do |l| %><!-- voi moi phan tu list ta lam l-->
+        <% @users.push(User.find_by_id(l)) %><!--dua vao moi @user la 1 id user-->
+        <%   end %>
+        <!-- render sau khi tim thay -->
+        <% if @users!= nil%>
+           <div style="width: 100%;display: inline-block;" >
+          <!-- neu tim ra dc 2 mem tro len thi hien thi nut add all -->
+              <%if @users.size > 1%>
+                <div class="user_seach" style="">
+                  <%= link_to user_group_memberlists_add_path(@group.user_id, @group,@users, :list => @users),:style => "background-color: lightblue;" do %>
+                  <img  src="/assets/add-more-green-icone-8951-128.png" width="100%" height="100%" style="border: 3px solid red;
+                  -moz-border-radius: 10px;
+                  -webkit-border-radius: 10px;
+                  -ms-border-radius: 10px;
+                  -o-border-radius: 10px;
+                  border-radius: 50%;
+                  ">
+                  <%end%>
+            add all
+          </div>
           <%end%>
-          add all
-        </div>
-        <%end%>
+          <%end%>
+    <% elsif params[:listg]!=nil %>
+       <%params[:listg].each do |k|%>
+       <%  @groups.push(Group.find_by_id(k)) %>
+       <%end%>
+
+       <%@groups.each do |n|%>
+       <% @users_group = Array.new %>
+       <div  style=" display: inline-block; float:left" >
+          <div style="background-color:red; display: inline-block; float:left">
+           <%= n.name %></div><br>
+           <!-- add all group -->
+           <% @member_list = Memberlist.where(:group_id => n.id) %>
+           <%  @member_list.each do |m| %>
+             <% @user = User.find_by_id(m.user_id) %>
+             <% @users_group.push(@user) %>
+             <%= render :partial => @user %>
+            <%end%>
+                <div class="user_seach" style="">
+                  <%= link_to user_group_memberlists_add_path(@group.user_id, @group,@users_group, :list => @users_group),:style => "background-color: lightblue;" do %>
+                  <img  src="/assets/add-more-green-icone-8951-128.png" width="100%" height="100%" style="border: 3px solid red;
+                  -moz-border-radius: 10px;
+                  -webkit-border-radius: 10px;
+                  -ms-border-radius: 10px;
+                  -o-border-radius: 10px;
+                  border-radius: 50%;
+                  ">
+                  <%end%>
+            add all
+          </div>
+       </div>
+       
+       <br>
+
+       <%end%>
+      <!-- end add all group -->
+
+    <% end %>
         <!-- end add all button -->
         <% @users.each do |u| %>
         <% @user = User.find_by_id(u.id) %>
         <%= render :partial => @user %>
         <% end %>
-      </div>
-      <% end %>
+    
 </div>

@@ -6,29 +6,32 @@ class MemberlistsController < ApplicationController
   end
 
   def add 
-    @list = params[:list]
+    @listtam = params[:list]
+   
     @this_user = User.find_by_id(params[:user_id])
     @this_group = Group.find_by_id(params[:group_id])
-    if params[:format].respond_to?("split")
-      params[:format].split('/').each{|f|
+    if @listtam != nil 
+       @list = Array.new
+      @listtam.each do |f|
+        @list.push(f)
+      end
+      @listtam.each do |f| 
         @member = User.find_by_id(f)
         if Memberlist.find_or_create_by(:group_id => @this_group.id,:user_id => @member.id)
-          @list.delete("#{@member.id}")
+          @list.delete("#{@member.id}")  #xoa cac pt trong list tuong ung
         end
-      }
-    else
-      @member = User.find_by_id(params[:format])
-      if Memberlist.find_or_create_by(:group_id => @this_group.id,:user_id => @member.id)
-        @list.delete("#{@member.id}")
       end
+    else #su dung voi add 1 user
+      @member = User.find_by_id(params[:format])
+      Memberlist.find_or_create_by(:group_id => @this_group.id,:user_id => @member.id)
     end
-    redirect_to user_group_path(@this_group.user_id,@this_group, :list => @list)
+    # binding.pry
+    redirect_to user_group_path(@this_user,@this_group, :list => @list)
   end
 #   def search
 #   @member = Memberlist.search params[:search]
 # end
 def show
-    #binding.pry
     @member = Memberlist.find_by_id(params[:id])
     @user = User.find_by_id(@member.user_id)
   end
