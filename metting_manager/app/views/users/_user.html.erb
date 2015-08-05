@@ -20,7 +20,8 @@ end
     -o-border-radius: 10px;
     border-radius: 50%;
     ")%>
-    <%= link_to user_group_memberlists_add_path(@group.user_id, @group, @user, :list => @users) do%>
+    <%= link_to user_group_memberlists_add_path(@group.user_id, @group, @user) do%>
+
     <img  src=" /assets/add-more-green-icone-8951-128.png" width="15px" height="15px">
     <% end %>
     <%= @user.profile.name %>
