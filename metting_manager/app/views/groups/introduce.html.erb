@@ -45,7 +45,7 @@ $(this).parent().find('ul:first > li').css({
 $('.desc_time_order').click(function(){
   var m = this.parentElement.parentElement;
   $("#show_desc").text(m.id);
-  $('#show_desc').append("<%= escape_javascript render('time_orders/time_desc', :locals => { :id => ""}) %>");
+  $('#show_desc').append("<%= escape_javascript render('time_orders/time_desc', :locals => { :id => "+m.id+"}) %>");
 });
 </script>
 
