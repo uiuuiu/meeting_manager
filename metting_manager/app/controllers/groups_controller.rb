@@ -76,6 +76,7 @@ class GroupsController < ApplicationController
 
   def introduce
     @group = Group.find_by_id(params[:group_id])
+    @time_order = TimeOrder.where(:group_id => params[:group_id]).sort
   end
 
   private
