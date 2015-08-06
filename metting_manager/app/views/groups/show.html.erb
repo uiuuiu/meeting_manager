@@ -1,6 +1,6 @@
 <div class="group_header">
   <p> <%= link_to "#{@group.name.upcase}",user_group_introduce_path(params[:user_id],@group)  %>  /   
-    <%= @group.memberlists.size %>  members
+    <%= @group.memberlists.size + 1 %>  members
   </p>
 </div>
 <!-- reder seach -->
