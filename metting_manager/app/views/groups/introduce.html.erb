@@ -1,7 +1,59 @@
 <div class="group_header">
   <p> <%= @group.name.upcase %>  /   
-    <%= link_to "#{@group.memberlists.size} members",user_group_path(params[:user_id],@group) %>
+    <%= link_to "#{@group.memberlists.size + 1} members",user_group_path(params[:user_id],@group) %>
   </p>
 </div>
 <!-- reder seach -->
 <%= render 'seach' %>
+<!-- in lich -->
+<% if !@time_order.blank? %>
+<!-- phan ben  trai -->
+<div id="time_order" class="col-xs-2 col-sm-3 col-md-3 col-lg-3 mg-top-15">
+  <% @time_prev = @time_order.first.time_start %>
+  <% @time_last = @time_order.last %>
+  <li class="mnav-ul-li"> <a><%= @time_order.first.time_start.to_date %></a>
+  <ul class="mnav-ul-ul">
+  <% @time_order.each do |time| %>
+    <% if time.time_start.to_date > @time_prev.to_date %>
+        </ul></li>
+        <% @time_prev = time.time_start.to_date %>
+        <li class="mnav-ul-li"><a><%= time.time_start.to_date %></a>
+        <ul class="mnav-ul-ul">
+        <%= render partial: "time_order", locals: { time: time } %>
+    <% elsif time == @time_last %>
+      </ul>
+      </li>
+    <% else %>
+      <%= render partial: "time_order", locals: { time: time } %>
+    <%end%>
+  <%end%>
+</div>
+<%end%>
+
+<script type="text/javascript">
+$('#time_order').on('click', '.mnav-ul-li a', function(){
+//alert( 'clicked' );
+//$(this).parent().find('ul>li:first').slideToggle();
+//$(this).find('ul:first > li').slideToggle();
+$(this).parent().find('ul:first > li').slideToggle();
+$(this).parent().find('ul:first > li').css({ 
+"display": "block",
+"width": "200px", 
+});
+}); 
+// danh cho thay doi test
+$('.desc_time_order').click(function(){
+  var m = this.parentElement.parentElement;
+  $("#show_desc").text(m.id);
+  $('#show_desc').append("<%= escape_javascript render('time_orders/time_desc', :locals => { :id => "+m.id+"}) %>");
+});
+</script>
+
+
+<div class="col-xs-4 col-sm-6 col-md-6 col-lg-8 blue-bordered-sidebar pg-top-15" id="show_desc" name="">
+<ul></ul>
+</div>
+<!-- end in lich -->
+<!-- 
+var x = "<form></form>"
+$('.deslj').append(x -->

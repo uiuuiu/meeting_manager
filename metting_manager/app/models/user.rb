@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
    has_many :groups
    has_one :profile
+   has_many :time_orders
    
    def self.create_user(user)
      User.create(email: user[:email],password: user[:password])
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
     if self.id.nil?
         false
     else
-        self.role_id ==2
+        self.role_id ==2 || self.role_id ==3
     end 
   end
 

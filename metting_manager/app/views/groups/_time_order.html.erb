@@ -1,0 +1,6 @@
+<li id="<%= time.id  %>" class="mnav-ul-li">
+  <a><%= "#{time.time_start.strftime("%H:%M")} to #{time.time_end.strftime("%H:%M")}" %> </a>
+  <ul class="mnav-ul-ul"> 
+  <li class="desc_time_order"><a><%= time.desc %> </a> </li>
+  </ul>
+</li>
