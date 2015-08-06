@@ -75,18 +75,17 @@ class TimeOrdersController < ApplicationController
     # end phan chia
     timelist.each do |f|
       f.each do |u|
-      timestart = u.min_by{|a| a[:ids]}[:objtime]
-      timeend = u.max_by{|a| a[:ids]}[:objtime]
-      length = u.count
-      cellid = u.min_by{|a| a[:ids]}[:ids]
-      if (Listid.find_by(:idcell => cellid) == nil) || (Listid.find_by(:idcell => cellid) != nil && Listid.find_by(:time_signed => timestart) == nil)
-        tior = TimeOrder.create(:user_id => current_user.id, :time_start => timestart, :time_end => timeend, :length => length, :cellid => cellid, :desc => params[:time_order][:user_id], :group_id => params[:time_order][:group_id])
-      end
-    end
-    end
-    objlist.each do |f|
-      if (Listid.find_by(:idcell => f[:ids]) == nil) || (Listid.find_by(:idcell => f[:ids]) != nil && Listid.find_by(:time_signed => f[:objtime]) == nil)
-        Listid.create(:idcell => f[:ids], :time_signed => f[:objtime])
+          timestart = u.min_by{|a| a[:ids]}[:objtime]
+          timeend = u.max_by{|a| a[:ids]}[:objtime]
+          length = u.count
+          cellid = u.min_by{|a| a[:ids]}[:ids]
+          if (Listid.find_by(:idcell => cellid) == nil) || (Listid.find_by(:idcell => cellid) != nil && Listid.find_by(:time_signed => timestart) == nil)
+            tior = TimeOrder.create(:user_id => current_user.id, :time_start => timestart, :time_end => timeend, :length => length, :cellid => cellid, :desc => params[:time_order][:user_id], :group_id => params[:time_order][:group_id])
+            u.each do |y|
+              Listid.create(:idcell => y[:ids], :time_signed => timestart)
+          end
+          end
+          
       end
     end
     end
@@ -114,4 +113,18 @@ class TimeOrdersController < ApplicationController
       #   timelist.clear
       # end
   end
+
+  def destroy
+      timeorder = TimeOrder.find_by_id(params[:time_order][:id])
+      cellid = timeorder.cellid
+      celltam = cellid
+      timeorder.length.times do
+        idlist = Listid.find_by(:idcell => celltam, :time_signed => params[:time_order][:time_signed])
+        idlist.destroy
+        celltam = celltam + 100
+      end
+      timeorder.destroy
+      redirect_to url_for(:controller => :welcome, :action => :index)
+  end
+
 end
