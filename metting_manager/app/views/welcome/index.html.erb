@@ -12,6 +12,8 @@ table td.highlighted {
   </style>
   <% @daytime = Array.new %>
   <% @tam = "" %>
+  <% @cur_user = 0 %>
+  <% @cur_user = current_user.id if current_user %>
 <table id='our_table' class="mytb" style="color: GreenYellow; width: 100%; table-layout: fixed;">
   <thead>
        <tr>
@@ -44,12 +46,12 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted">
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted" name = "<%= f.id %>" data-daytime ="<%= f.time_start %>">
                           <% @profile = Profile.find_by_user_id(f.user_id) %>
                           <% @user= User.find_by_id(@profile.user_id) %>
                           <% @users = User.new  %>
                           <% @group = Group.find_by_id(1) %>
-                          <div class="user_seach_welcome">
+                          <div class="user_seach_welcome" id="<%= f.user_id %>">
                           <%= render 'form_user' %>
                           </div>
                           </td>
@@ -63,12 +65,12 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none" class="highlighted">
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" style="witdh: 10px; display: none" class="highlighted" name = "<%= f.id %>" data-daytime ="<%= f.time_start %>">
                            <% @profile = Profile.find_by_user_id(f.user_id) %>
                           <% @user= User.find_by_id(@profile.user_id) %>
                           <% @users = User.new  %>
                           <% @group = Group.find_by_id(1) %>
-                          <div class="user_seach_welcome">
+                          <div class="user_seach_welcome" id="<%= f.user_id %>">
                           <%= render 'form_user' %>
                           </div>
                         </td>
@@ -94,16 +96,31 @@ table td.highlighted {
     </tbody>
 </table>
   <script type="text/javascript" charset="utf-8">
+  var sttdelete = false;
     $(function () {
   var isMouseDown = false,
     isHighlighted;
     list = new Array();   
+    var idelete;
   $("#our_table td")
     .mousedown(function (e) {
       isMouseDown = true;
-      $(this).toggleClass("highlighted");
-      isHighlighted = $(this).hasClass("highlighted");
-      return false; // prevent text selection
+      if(sttdelete)
+      {
+        if(! $(this).is(':empty'))
+        {
+          $('#timeorderid').val(this.getAttribute("name"));
+          $('#timesigned').val(this.getAttribute("data-daytime"));
+          $('#myModalmy').modal('show');
+        }
+        isMouseDown = false;
+      }
+      else
+      {
+          $(this).toggleClass("highlighted");
+          isHighlighted = $(this).hasClass("highlighted");
+          return false; // prevent text selection
+      }
     })
     
     .mouseover(function (e) {
@@ -196,6 +213,43 @@ table td.highlighted {
           }
         });
     }
+    function adelete(){
+      if (sttdelete)
+      {
+        sttdelete = false;
+      }
+      else
+      {
+        sttdelete = true;
+      }
+      if(<%= @cur_user %> != 0)
+      {
+        if(sttdelete)
+        {
+            var btn = document.getElementById("adelete");
+            btn.value = "Done";
+            $("#our_table td div").each(function(){
+                if ( this.id == <%= @cur_user %>)
+                {
+                  this.style = "display: none";
+                  this.parentElement.style.backgroundColor = "red";
+                }
+              });
+        }
+        else
+        {
+            var btn = document.getElementById("adelete");
+            btn.value = "Delete";
+            $("#our_table td div").each(function(){
+                if ( this.id == <%= @cur_user %>)
+                {
+                  this.style = "display: visible";
+                  this.parentElement.style.backgroundColor = "#999";
+                }
+            });
+        }
+      }
+    }
 </script>
 <script type="text/javascript">
         var textbox1 = "";
@@ -222,12 +276,15 @@ table td.highlighted {
     </script> 
   <button onclick="next()">Next</button>
   <button onclick="back()">Back</button>
+  <% if current_user %>
   <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
         Create
-    </button><br>
-    <br><br>
+  </button><br>
+  <input type="button" value="Delete" id="adelete" onclick="adelete()"></input>
+  <% end %> 
+  <br><br>
     <!-- Modal -->
-    <% @groups = Group.where(:user_id => current_user.id) %>
+    <% @groups = Group.where(:user_id => current_user.id) if current_user %>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -239,7 +296,7 @@ table td.highlighted {
                 <div class="modal-body">
                     Text Box 1 <input type="textbox" id="textbox1"> </input><br>
                     Text Box 2 <input type="textbox" id="textbox2"> </input><br>
-                    <%= f.collection_select(:group_id, @groups, :id, :name ) %>
+                    <%= f.collection_select(:group_id, @groups, :id, :name ) if @groups %>
                 </div>
                 <div class="modal-footer">
                       <%= f.hidden_field :time_signed, :id => "daytime" %>
@@ -251,3 +308,27 @@ table td.highlighted {
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
+
+    <!-- cofirm -->
+     <div class="modal fade" id="myModalmy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Input Form</h4>
+                </div>
+                <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true, :remote => true}, url: time_order_path(0), method: :delete) do |f| %>
+                <div class="modal-body">
+                    Do you want to cancel this meeting?
+                </div>
+                <div class="modal-footer">
+                      <%= f.hidden_field :id, :id => "timeorderid" %>
+                      <%= f.hidden_field :time_signed, :id => "timesigned" %>
+                    <%= f.submit "OK", class: "btn btn-primary" %>
+                    <% end %>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.cofirm -->
