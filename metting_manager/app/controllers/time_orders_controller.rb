@@ -123,8 +123,9 @@ class TimeOrdersController < ApplicationController
         idlist.destroy
         celltam = celltam + 100
       end
-      timeorder.destroy
-      redirect_to url_for(:controller => :welcome, :action => :index)
+      if timeorder.destroy
+        redirect_to url_for(:controller => :welcome, :action => :index)
+      end
   end
 
 end
