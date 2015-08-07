@@ -1,2 +1,17 @@
+<div>sadsadasd
+<%= params[:id].to_s %>
+<%= params.to_s %>
+  <!-- desc buoi hop -->
+  <% if @timeorder = TimeOrder.find_by_id(params[:id]) %>
+  <div>
+  <%= @timeorder.desc %>
+  </div>
+  <!-- end desc -->
 
-<%= params[:id] %>
+  <!-- div cho comman -->
+  <div>
+
+  </div>
+  <!-- end comman -->
+  <%end%>
+</div>

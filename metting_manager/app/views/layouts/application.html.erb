@@ -169,6 +169,7 @@
 </div>
 <!--toan bo !-->
 <div class="container" style="width:100%;height:100%;padding-left: 10px;" id="toanbo" >
+
 <!--khung ben phai !-->
     <div class="col-md-2" style="box-shadow: 0px 0px 4px 4px grey;width: 200px;border: 5px solid silver;
     -moz-border-radius: 10px;
@@ -226,14 +227,15 @@
 
       <!-- attend-group -->
         <div id='atten_group_drop' style="margin-left: -14px;width: 120%; display: block">
-        <% @at_group = Group.where(user_id: current_user.id) %>
+        <% @list_group = Memberlist.where(user_id: current_user.id) %>
           <li class="mnav-ul-li" style="width:97%;display: inline-block">
             <%= button_tag "atten group",:style => "width: 100%",:class => "btn btn-info btn-sm"%>
             <ul class='mnav-ul-ul'>
-              <% if @at_group!=nil&&@at_group.size>0 %>
-                <% @at_group.each do |f| %>
+              <% if @list_group!=nil&&@list_group.size>0 %>
+                <% @list_group.each do |f| %>
+                <% @at_group = Group.find_by_id(f.group_id) %>
                   <li>
-                  <%=link_to "#{f.name}",user_group_introduce_path(current_user,f)%>
+                  <%=link_to "#{@at_group.name}",user_group_introduce_path(current_user,@at_group)%>
                   </li>
                 <%end%>
               <%end%>

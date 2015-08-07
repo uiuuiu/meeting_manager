@@ -6,8 +6,8 @@ class UsersController < ApplicationController
 
   def index
   end
+  
   def search
-    
     @users = Array.new
     @groups =Array.new 
     @group = Group.find_by_id(params[:group_id])#giup dieu huong phai lay group_id
@@ -24,7 +24,6 @@ class UsersController < ApplicationController
        @groups.push( Group.find_by_id(x.id))
       end
      redirect_to user_group_path(@group.user_id,@group, :listg => @groups)#show trang group sho
-    
     end
   end
 end

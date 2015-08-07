@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 <div style="display: inline-block">
-  <%= form_tag users_search_path, method: :post %>
+  <%= form_for(@seach = "", url: users_search_path) do |f| %>
   <!-- loai tim kiem -->
-  <%@find_style=["name","group"]%>
-  <%= select_tag(:find_style, options_for_select(
-    @find_style.collect{|u| 
-      [u] }
-      ))
-      %>
+    <% @find_style=["name","group"] %>
+    <%= select_tag(:find_style, options_for_select(
+            @find_style.collect{|u| 
+                [u] }
+    ))%>
       <!-- end loai tim kiem -->
-      <%= text_field_tag :name ,"",:style => "width:50%;"%>
-      <%= hidden_field_tag :group_id, @group.id %>
-      <%= submit_tag "let go", :class => "btn-submit btn btn-info btn-sm"%>
+    <%= f.text_field :name ,:style => "width:50%;"%>
+    <%= f.hidden_field :group_id,:value => @group.id %>
+    <%= f.submit "let go", :class => "btn-submit btn btn-info btn-sm" %>
+  <% end %>
       <!-- drop menu setting -->
       <ul class="dropdown bs-example">
         <img  src=" /assets/setting.jpeg " data-toggle="dropdown" class="dropdown-toggle" width="15px" height="15px">

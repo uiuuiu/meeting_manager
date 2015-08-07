@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
    has_many :groups
    has_one :profile
    has_many :time_orders
+   has_many :comments
    
    def self.create_user(user)
      User.create(email: user[:email],password: user[:password])

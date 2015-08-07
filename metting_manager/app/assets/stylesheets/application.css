@@ -151,3 +151,7 @@ display: none;
 
   }
   /*end trong _user*/
+  .h1, li > h1 {
+    font-size: 36px;
+    margin-top: 0px;
+  }

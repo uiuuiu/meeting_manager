@@ -4,11 +4,14 @@
   </p>
 </div>
 <!-- reder seach -->
-<%= render 'seach' %>
+<div>
+    <%= render 'seach' %>
+</div>
 <!-- in lich -->
-<% if !@time_order.blank? %>
+
 <!-- phan ben  trai -->
 <div id="time_order" class="col-xs-2 col-sm-3 col-md-3 col-lg-3 mg-top-15">
+<% if !@time_order.blank? %>
   <% @time_prev = @time_order.first.time_start %>
   <% @time_last = @time_order.last %>
   <li class="mnav-ul-li"> <a><%= @time_order.first.time_start.to_date %></a>
@@ -27,33 +30,48 @@
       <%= render partial: "time_order", locals: { time: time } %>
     <%end%>
   <%end%>
-</div>
 <%end%>
-
+</div>
 <script type="text/javascript">
-$('#time_order').on('click', '.mnav-ul-li a', function(){
+  $('#time_order').on('click', '.mnav-ul-li a', function(){
 //alert( 'clicked' );
 //$(this).parent().find('ul>li:first').slideToggle();
 //$(this).find('ul:first > li').slideToggle();
 $(this).parent().find('ul:first > li').slideToggle();
 $(this).parent().find('ul:first > li').css({ 
-"display": "block",
-"width": "200px", 
+  "display": "block",
+  "width": "200px", 
 });
 }); 
-// danh cho thay doi test
-$('.desc_time_order').click(function(){
-  var m = this.parentElement.parentElement;
-  $("#show_desc").text(m.id);
-  $('#show_desc').append("<%= escape_javascript render('time_orders/time_desc', :locals => { :id => "+m.id+"}) %>");
-});
 </script>
 
+<!-- phan ben phai -->
+<div class="col-xs-4 col-sm-6 col-md-6 col-lg-8 pg-top-15">
+  <% if @timenow == nil %>
+    no meeting to day
+  <%else%>
+    <div >
+      <% time_end = @timenow.time_end.strftime("%H").to_i+1 %>
+      <li style="color: green;padding-top:5%;"><%= "#{@timenow.time_start.strftime("%H:%M")} to #{time_end}#{@timenow.time_end.strftime(":%M")}"  %><h1 style="color: Blue; pdding-top:5%;"> <%= @timenow.desc %> </h1></li>
+    </div>
+    <!-- comment -->
+    <div id="commented">
+      <%= render :partial => @timenow.comments if @timenow.comments %>
+    </div>
+    <!-- end comment -->
 
-<div class="col-xs-4 col-sm-6 col-md-6 col-lg-8 blue-bordered-sidebar pg-top-15" id="show_desc" name="">
-<ul></ul>
+    <!-- create comment -->
+    <div>
+     <%= form_for([@timenow, @timenow.comments.build], remote: true) do |f| %>
+     <p>
+       <br>
+       <%= f.text_area :desc ,id: 'desc_comment' %>
+     </p>   
+
+     <p><%= f.submit "Create comment",  id: "button", class: "btn btn-success green" %></p>
+     <% end %>
+   </div>
+    <!-- end comment -->
+  <%end%>
 </div>
 <!-- end in lich -->
-<!-- 
-var x = "<form></form>"
-$('.deslj').append(x -->
