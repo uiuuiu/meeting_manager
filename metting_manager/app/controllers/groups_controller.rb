@@ -8,15 +8,15 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
    if current_user
-        @groups = current_user.groups
-      end
+    @groups = current_user.groups
+  end
     # @groups = Group.all
   end
   # GET /groups/1
   # GET /groups/1.json
   def show 
-      @group = Group.find_by_id(params[:id])
-      @listmembers = @group.memberlists if @group.memberlists
+    @group = Group.find_by_id(params[:id])
+    @listmembers = @group.memberlists if @group.memberlists
   end
 
   # GET /groups/new
@@ -76,7 +76,19 @@ class GroupsController < ApplicationController
 
   def introduce
     @group = Group.find_by_id(params[:group_id])
-    @time_order = TimeOrder.where(:group_id => params[:group_id]).sort
+    @time_order = TimeOrder.where(:group_id => params[:group_id]).sort_by {|vn| vn.time_start}
+    if !params[:time_orde_id].nil?
+      @timenow = TimeOrder.find_by_id(params[:time_orde_id])
+    else
+      c = Array.new
+      @time_order.each{|t|
+        if t.time_start.to_date == Time.now.to_date
+          c.push(t)
+        end
+      }
+      @timenow = c.sort_by {|vn| vn.time_start}.first if c.present?
+    end
+    # @comment = Comment.where(:time_order_id => @timenow.id)
   end
 
   private
@@ -88,4 +100,4 @@ class GroupsController < ApplicationController
     def group_params
       params.require(:group).permit(:name, :user_id, :desc)
     end
-end
+  end

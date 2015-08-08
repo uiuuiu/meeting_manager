@@ -1,6 +1,7 @@
-<li id="<%= time.id  %>" class="mnav-ul-li">
-  <a><%= "#{time.time_start.strftime("%H:%M")} to #{time.time_end.strftime("%H:%M")}" %> </a>
+<li class="mnav-ul-li">
+  <% h_time_end = time.time_end.strftime("%H").to_i + 1 %>
+  <a><%= "#{time.time_start.strftime("%H:%M")} to #{h_time_end}#{time.time_end.strftime(":%M")}" %> </a>
   <ul class="mnav-ul-ul"> 
-  <li class="desc_time_order"><a><%= time.desc %> </a> </li>
+    <li class="desc_time_order"><%= link_to "#{time.desc}",user_group_introduce_path(params[:user_id],@group,:time_orde_id => time) %></li>
   </ul>
 </li>

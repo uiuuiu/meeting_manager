@@ -28,6 +28,9 @@ Rails.application.routes.draw do
     end
   end
   resources :time_orders do
+    resources :comments do
+      post 'create'
+    end
   end
   resources :welcome do
   end
