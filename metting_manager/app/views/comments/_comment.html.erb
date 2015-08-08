@@ -1,6 +1,6 @@
 <div id="text_comment">
 <div class="review_<%=h comment.id %>">
-  <strong style="color: blue"><%= current_user.profile.name %>:</strong>
+  <strong style="color: blue"><%= comment.user.profile.name %>:</strong>
   <strong style="color: lightblue;font-size: 10px" ><%= comment.time_sign %></strong>
   <%= comment.desc %>
 
