@@ -8,7 +8,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    binding.pry  
+    @time_order = TimeOrder.find(params[:time_order_id])
+    @comment = Comment.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+    @comment.destroy 
   end
 
 end
