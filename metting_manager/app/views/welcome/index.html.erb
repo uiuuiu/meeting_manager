@@ -46,7 +46,7 @@ table td.highlighted {
                     <% @orders.each do |f| %>
                         <% if f.cellid == tam*100+ d.day %>
                         <% t = false %>
-                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted" name = "<%= f.id %>" data-daytime ="<%= f.time_start %>">
+                        <td id="<%= tam*100+ d.day %>" rowspan ="<%= f.length %>" class="highlighted" name = "<%= f.id %>" data-daytime ="<%= f.time_start %>" data-userid = "<%= f.user_id %>">
                           <% @profile = Profile.find_by_user_id(f.user_id) %>
                           <% @user= User.find_by_id(@profile.user_id) %>
                           <% @users = User.new  %>
@@ -107,10 +107,12 @@ table td.highlighted {
       isMouseDown = true;
       if(sttdelete)
       {
-        if(! $(this).is(':empty'))
+        if((! $(this).is(':empty')) && this.getAttribute("data-userid") == <%= @cur_user %>)
         {
           $('#timeorderid').val(this.getAttribute("name"));
           $('#timesigned').val(this.getAttribute("data-daytime"));
+          var n = document.getElementById("btndel");
+          n.name = this.id;
           $('#myModalmy').modal('show');
         }
         isMouseDown = false;
@@ -250,30 +252,36 @@ table td.highlighted {
         }
       }
     }
+    function submitok(e){
+      $('#myModalmy').modal('hide');
+      var td = document.getElementById(e.name);
+      $(td).empty();
+      td.style.backgroundColor = "#ccc";
+    }
 </script>
-<script type="text/javascript">
-        var textbox1 = "";
-        var textbox2 = "";
-        var textbox3 = "";
-        var descr = "";
-        function saveTextBoxes() {
-            textbox1 = $("#textbox1").val();
-            textbox2 = $("#textbox2").val();
-            textbox3 = $("#textbox3").val();
-            $("#descr").val(textbox1 + textbox2 + textbox2) ;
-            $("#our_table td").each(function(){
-              if($(this).hasClass( "highlighted" ) && $(this).is(':empty'))
-              {
-                columnNumber = $(this).index() + 1;
-                headerText = $('th:nth-child(' + columnNumber + ')').text();
-                dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
-                list.push(dayytime);               
-                }
-            });
-            $('#daytime').val(list);
-            list = [];
-        }
-    </script> 
+  <script type="text/javascript">
+          var textbox1 = "";
+          var textbox2 = "";
+          var textbox3 = "";
+          var descr = "";
+          function saveTextBoxes() {
+              textbox1 = $("#textbox1").val();
+              textbox2 = $("#textbox2").val();
+              textbox3 = $("#textbox3").val();
+              $("#descr").val(textbox1 + textbox2 + textbox2) ;
+              $("#our_table td").each(function(){
+                if($(this).hasClass( "highlighted" ) && $(this).is(':empty'))
+                {
+                  columnNumber = $(this).index() + 1;
+                  headerText = $('th:nth-child(' + columnNumber + ')').text();
+                  dayytime = $(this).siblings(":first").text()+" "+headerText +" "+this.id;
+                  list.push(dayytime);               
+                  }
+              });
+              $('#daytime').val(list);
+              list = [];
+          }
+  </script> 
   <button onclick="next()">Next</button>
   <button onclick="back()">Back</button>
   <% if current_user %>
@@ -315,16 +323,16 @@ table td.highlighted {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Input Form</h4>
+                    <h4 class="modal-title" id="myModalLabel">Confirm</h4>
                 </div>
-                <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true, :remote => true}, url: time_order_path(0), method: :delete) do |f| %>
+                <%= form_for(@time_order, :html => {:class => "form-horizontal center", :multipart => true, :remote => true}, url: time_order_path(1), method: :delete) do |f| %>
                 <div class="modal-body">
                     Do you want to cancel this meeting?
                 </div>
                 <div class="modal-footer">
                       <%= f.hidden_field :id, :id => "timeorderid" %>
                       <%= f.hidden_field :time_signed, :id => "timesigned" %>
-                    <%= f.submit "OK", class: "btn btn-primary" %>
+                    <%= f.submit "OK", class: "btn btn-primary", :onclick => "return submitok(this)", :id => "btndel" %>
                     <% end %>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
