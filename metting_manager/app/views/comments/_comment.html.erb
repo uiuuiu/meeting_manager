@@ -5,7 +5,7 @@
   <%= comment.desc %>
 
   <% if current_user.role_id==1||current_user && current_user.id == comment.user_id %>
-    <%= link_to  time_order_comment_path(@time_order, comment, :format => :js),:remote => true, id: "delete", method: :delete  do %>
+    <%= link_to  time_order_comment_path(@time_order, comment, :format => :js),:remote => true, data: { confirm: 'Are you sure?' }, id: "delete", method: :delete  do %>
       <img  src="/assets/DeleteRed.png" width="15px" height="15px">
     <% end %>
   <% end %>
