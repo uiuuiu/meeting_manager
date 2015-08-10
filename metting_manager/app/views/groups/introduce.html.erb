@@ -24,7 +24,6 @@
         <%= render partial: 'time_orders/color_time', locals: {time: time} %>
         <ul class="mnav-ul-ul">
         <%= render partial: "time_order", locals: { time: time } %>
-
     <% elsif time == @time_last %>
       </ul>
       </li>
@@ -51,32 +50,7 @@ $(this).parent().find('ul:first > li').css({
 </script>
 
 <!-- phan ben phai -->
-<div class="col-xs-4 col-sm-6 col-md-6 col-lg-8 pg-top-15">
-  <% if @timenow == nil %>
-    no meeting to day
-  <%else%>
-    <div >
-      <% time_end = @timenow.time_end.strftime("%H").to_i+1 %>
-      <li style="color: green;padding-top:5%;"><%= "#{@timenow.time_start.strftime("%H:%M")} to #{time_end}#{@timenow.time_end.strftime(":%M")}"  %><h1 style="color: Blue; pdding-top:5%;"> <%= @timenow.desc %> </h1></li>
-    </div>
-    <!-- comment -->
-    <div id="commented">
-      <%= render :partial => @timenow.comments if @timenow.comments %>
-    </div>
-    <!-- end comment -->
-
-    <!-- create comment -->
-    <div>
-     <%= form_for([@timenow, @timenow.comments.build], remote: true) do |f| %>
-     <p>
-       <br>
-       <%= f.text_area :desc ,id: 'desc_comment' %>
-     </p>   
-
-     <p><%= f.submit "Create comment",  id: "button", class: "btn btn-success green" %></p>
-     <% end %>
-   </div>
-    <!-- end comment -->
-  <%end%>
+<div class="col-xs-4 col-sm-6 col-md-6 col-lg-8 pg-top-15" id="right_full_desc">
+  <%= render partial: "right_desc" %>
 </div>
 <!-- end in lich -->

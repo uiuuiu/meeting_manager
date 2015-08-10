@@ -75,6 +75,7 @@ class GroupsController < ApplicationController
   end
 
   def introduce
+
     @group = Group.find_by_id(params[:group_id])
     @time_order = TimeOrder.where(:group_id => params[:group_id]).sort_by {|vn| vn.time_start}
     if !params[:time_orde_id].nil?
@@ -88,7 +89,11 @@ class GroupsController < ApplicationController
       }
       @timenow = c.sort_by {|vn| vn.time_start}.first if c.present?
     end
-    # @comment = Comment.where(:time_order_id => @timenow.id)
+    if !params[:render].nil?
+      respond_to do |format| 
+        format.js
+      end
+    end
   end
 
   private
