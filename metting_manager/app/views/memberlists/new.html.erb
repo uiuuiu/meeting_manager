@@ -1,9 +1,0 @@
-<%= form_for([current_user, @group, @group.memberlists.build]) do |f| %>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

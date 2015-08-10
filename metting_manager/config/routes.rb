@@ -27,19 +27,27 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :time_orders do
     resources :comments do
       post 'create'
     end
   end
+
   resources :welcome do
   end
+
   resources :attended_groups do
+  end
+
+  resources :comments do
+    get 'create'
   end
 
   resources :groups do
     get 'profile'
   end
+
   resources :profiles do
     get 'show'
   end
