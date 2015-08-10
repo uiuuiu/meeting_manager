@@ -1,7 +1,19 @@
-<li class="mnav-ul-li">
+<!-- doi mau  --> 
+<% if @timenow!=nil && time == @timenow %>
+  <li class="mnav-ul-li" >
+  <% h_time_end = time.time_end.strftime("%H").to_i + 1 %>
+  <a style="color: #99FF33"><%= "#{time.time_start.strftime("%H:%M")} to #{h_time_end}#{time.time_end.strftime(":%M")}" %> </a>
+  <ul class="mnav-ul-ul"> 
+    <li lass="desc_time_order"><%= link_to "#{time.desc}",user_group_introduce_path(params[:user_id],@group,:time_orde_id => time), :style => "color: #99FF33" %></li>
+  </ul>
+</li>
+<!-- khong doi mau -->
+<% else %>
+  <li class="mnav-ul-li" style="color: red;">
   <% h_time_end = time.time_end.strftime("%H").to_i + 1 %>
   <a><%= "#{time.time_start.strftime("%H:%M")} to #{h_time_end}#{time.time_end.strftime(":%M")}" %> </a>
   <ul class="mnav-ul-ul"> 
     <li class="desc_time_order"><%= link_to "#{time.desc}",user_group_introduce_path(params[:user_id],@group,:time_orde_id => time) %></li>
   </ul>
 </li>
+<% end %>
