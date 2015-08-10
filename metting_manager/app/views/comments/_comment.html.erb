@@ -1,8 +1,8 @@
 <div id="text_comment">
 <div class="review_<%=h comment.id %>">
-  <strong style="color: blue"><%= comment.user.profile.name %>:</strong>
-  <strong style="color: lightblue;font-size: 10px" ><%= comment.time_sign %></strong>
-  <%= comment.desc %>
+  <strong style="color: blue"><%= link_to "#{comment.user.profile.name }",user_profile_path(comment.user,comment.user.profile)%>:</strong>
+  <strong style="color: lightblue;font-size: 10px;"><%= comment.time_sign %></strong>
+  <h data-html="true"><%= comment.desc %></h>
 
   <% if current_user.role_id==1||current_user && current_user.id == comment.user_id %>
     <%= link_to  time_order_comment_path(@time_order, comment, :format => :js),:remote => true, data: { confirm: 'Are you sure?' }, id: "delete", method: :delete  do %>

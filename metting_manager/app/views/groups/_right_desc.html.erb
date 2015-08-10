@@ -18,7 +18,20 @@
        <br>
        <%= f.text_area :desc ,id: 'desc_comment' %>
      </p>   
-
+     <!--  -->
+     <script>
+       $('#desc_comment').keydown(function (e){
+        if(e.keyCode == 13){
+          var d = {desc: (this).value};
+          $.ajax({
+                 url: "<%= comment_create_path(@timenow,:time_order_id => @timenow.id) %>",
+                type: "GET",
+                data: { comment: d}
+        });
+        }
+      })
+     </script>
+     <!--  -->
      <p><%= f.submit "Create comment",  id: "button", class: "btn btn-success green" %></p>
      <% end %>
    </div>
