@@ -16,18 +16,26 @@
   <li class="mnav-ul-li"> <a><%= @time_order.first.time_start.to_date %></a>
   <ul class="mnav-ul-ul">
   <% @time_order.each do |time| %>
+
     <% if time.time_start.to_date > @time_prev.to_date %>
         </ul></li>
         <% @time_prev = time.time_start.to_date %>
-        <li class="mnav-ul-li"><a><%= time.time_start.to_date %></a>
+        <% if time.time_start.to_date == Time.now.to_date  %>
+            <li class="mnav-ul-li"><a style="color: red"><%= time.time_start.to_date %></a>
+          <% else %>
+            <li class="mnav-ul-li"><a><%= time.time_start.to_date %></a>
+        <% end %>
         <ul class="mnav-ul-ul">
         <%= render partial: "time_order", locals: { time: time } %>
+
     <% elsif time == @time_last %>
       </ul>
       </li>
+
     <% else %>
       <%= render partial: "time_order", locals: { time: time } %>
     <%end%>
+    
   <%end%>
 <%end%>
 </div>
