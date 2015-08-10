@@ -8,7 +8,13 @@
     <%= u.label :name %><br>
     <%= u.text_field :name %>
   </div>
+
   <%end%>
+
+  <div class="field">
+    <%= f.label :"role name" %><br>
+    <%= f.select :role_id, options_for_select(@role.collect{ |f1| [f1.name, f1.id] }) %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
