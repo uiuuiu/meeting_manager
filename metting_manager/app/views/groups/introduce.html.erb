@@ -13,18 +13,15 @@
 <% if !@time_order.blank? %>
   <% @time_prev = @time_order.first.time_start %>
   <% @time_last = @time_order.last %>
-  <li class="mnav-ul-li"> <a><%= @time_order.first.time_start.to_date %></a>
+  <li class="mnav-ul-li"> 
+    <%= render partial: 'time_orders/color_time', locals: {time: @time_order.first} %>
   <ul class="mnav-ul-ul">
   <% @time_order.each do |time| %>
-
     <% if time.time_start.to_date > @time_prev.to_date %>
         </ul></li>
         <% @time_prev = time.time_start.to_date %>
-        <% if time.time_start.to_date == Time.now.to_date  %>
-            <li class="mnav-ul-li"><a style="color: red"><%= time.time_start.to_date %></a>
-          <% else %>
-            <li class="mnav-ul-li"><a><%= time.time_start.to_date %></a>
-        <% end %>
+        <li class="mnav-ul-li">
+        <%= render partial: 'time_orders/color_time', locals: {time: time} %>
         <ul class="mnav-ul-ul">
         <%= render partial: "time_order", locals: { time: time } %>
 
@@ -39,6 +36,7 @@
   <%end%>
 <%end%>
 </div>
+
 <script type="text/javascript">
   $('#time_order').on('click', '.mnav-ul-li a', function(){
 //alert( 'clicked' );

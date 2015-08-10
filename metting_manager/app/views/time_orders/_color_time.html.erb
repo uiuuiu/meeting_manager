@@ -1,0 +1,13 @@
+<% if @timenow!=nil && time == @timenow  %>
+  <% if time.time_start.to_date == Time.now.to_date %>
+    <a style="color: red"><%= time.time_start.to_date %></a>
+  <% else %>
+    <a style="color: #99FF33"><%= time.time_start.to_date %></a>
+  <% end %>
+<% else %>
+  <% if time.time_start.to_date == Time.now.to_date %>
+    <a style="color: red"><%= time.time_start.to_date %></a>
+  <% else %>
+    <a><%= time.time_start.to_date %></a>
+  <% end %>
+<% end %>
